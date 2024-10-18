@@ -33,3 +33,8 @@ type WaveConfig = {
     rightAnswer: string;
     wrongAnswer: string;
 };
+
+type ChoiceConfig = {
+    choice: string;
+    isCorrectAnswer: boolean;
+};

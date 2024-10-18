@@ -7,12 +7,14 @@ export const AdModelEvents = {
 
 export const BoardModelEvents = { GameOverUpdate: 'BoardModelGameOverUpdate', WavesUpdate: 'BoardModelWavesUpdate' };
 
+export const ChoiceModelEvents = {
+    ChoiceUpdate: 'ChoiceModelChoiceUpdate',
+    IsCorrectAnswerUpdate: 'ChoiceModelIsCorrectAnswerUpdate',
+};
+
 export const CtaModelEvents = { VisibleUpdate: 'CtaModelVisibleUpdate' };
 
-export const GameModelEvents = {
-    StateUpdate: 'GameModelStateUpdate',
-    BoardUpdate: 'GameModelBoardUpdate',
-};
+export const GameModelEvents = { StateUpdate: 'GameModelStateUpdate', BoardUpdate: 'GameModelBoardUpdate' };
 
 export const HeadModelEvents = { GameModelUpdate: 'HeadModelGameModelUpdate', AdUpdate: 'HeadModelAdUpdate' };
 

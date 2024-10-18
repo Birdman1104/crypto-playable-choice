@@ -1,16 +1,17 @@
+import { ChoiceModel } from './ChoiceModel';
 import { ObservableModel } from './ObservableModel';
 
 export class WaveModel extends ObservableModel {
     private _waveLevel: number;
-    private _rightAnswer: string;
-    private _wrongAnswer: string;
+    private _rightAnswer: ChoiceModel;
+    private _wrongAnswer: ChoiceModel;
 
-    constructor(private config: WaveConfig) {
+    constructor(config: WaveConfig) {
         super('WaveModel');
 
         this._waveLevel = config.level;
-        this._rightAnswer = config.rightAnswer;
-        this._wrongAnswer = config.wrongAnswer;
+        this._rightAnswer = new ChoiceModel({ choice: config.rightAnswer, isCorrectAnswer: true });
+        this._wrongAnswer = new ChoiceModel({ choice: config.wrongAnswer, isCorrectAnswer: false });
 
         this.makeObservable();
     }
@@ -23,19 +24,19 @@ export class WaveModel extends ObservableModel {
         this._waveLevel = value;
     }
 
-    get rightAnswer(): string {
+    get rightAnswer(): ChoiceModel {
         return this._rightAnswer;
     }
 
-    set rightAnswer(value: string) {
+    set rightAnswer(value: ChoiceModel) {
         this._rightAnswer = value;
     }
 
-    get wrongAnswer(): string {
+    get wrongAnswer(): ChoiceModel {
         return this._wrongAnswer;
     }
 
-    set wrongAnswer(value: string) {
+    set wrongAnswer(value: ChoiceModel) {
         this._wrongAnswer = value;
     }
 

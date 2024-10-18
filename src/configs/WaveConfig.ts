@@ -1,22 +1,62 @@
 export const WAVE_CONFIG = Object.freeze([
     {
         level: 1,
-        rightAnswer: 'NFT',
-        wrongAnswer: 'BURGER',
+        rightChoice: {
+            name: 'NFT',
+            price: 50,
+            reward: '5000',
+            isCorrectAnswer: true,
+        },
+        wrongChoice: {
+            name: 'BURGER',
+            price: 20,
+            reward: -20,
+            isCorrectAnswer: false,
+        },
     },
     {
         level: 2,
-        rightAnswer: 'ETH',
-        wrongAnswer: 'ROLEX',
+        rightChoice: {
+            name: 'ETH',
+            price: 4000,
+            reward: '100000',
+            isCorrectAnswer: true,
+        },
+        wrongChoice: {
+            name: 'ROLEX',
+            price: 5000,
+            reward: -5000,
+            isCorrectAnswer: false,
+        },
     },
     {
         level: 3,
-        rightAnswer: 'BITCOIN',
-        wrongAnswer: 'YACHT',
+        rightChoice: {
+            name: 'BITCOIN',
+            price: 65000,
+            reward: '1000000',
+            isCorrectAnswer: true,
+        },
+        wrongChoice: {
+            name: 'YACHT',
+            price: 80000,
+            reward: -80000,
+            isCorrectAnswer: false,
+        },
     },
     {
         level: 4,
-        rightAnswer: 'CRYPTO WALLET',
-        wrongAnswer: 'MINING FARM',
+        rightChoice: {
+            name: 'CRYPTO WALLET',
+            price: 200000,
+            reward: '2000000',
+            isCorrectAnswer: true,
+        },
+        wrongChoice: {
+            name: 'MINING FARM',
+            price: 500000,
+            reward: '20000000',
+            isCorrectAnswer: false,
+        },
     },
 ]);

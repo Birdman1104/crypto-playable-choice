@@ -10,8 +10,8 @@ export class WaveModel extends ObservableModel {
         super('WaveModel');
 
         this._waveLevel = config.level;
-        this._rightAnswer = new ChoiceModel({ choice: config.rightAnswer, isCorrectAnswer: true });
-        this._wrongAnswer = new ChoiceModel({ choice: config.wrongAnswer, isCorrectAnswer: false });
+        this._rightAnswer = new ChoiceModel(config.rightChoice);
+        this._wrongAnswer = new ChoiceModel(config.wrongChoice);
 
         this.makeObservable();
     }

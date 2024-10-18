@@ -30,11 +30,13 @@ type SpriteConfig = {
 
 type WaveConfig = {
     level: number;
-    rightAnswer: string;
-    wrongAnswer: string;
+    rightChoice: ChoiceConfig;
+    wrongChoice: ChoiceConfig;
 };
 
 type ChoiceConfig = {
-    choice: string;
+    name: string;
+    price: number;
+    reward: string | number;
     isCorrectAnswer: boolean;
 };

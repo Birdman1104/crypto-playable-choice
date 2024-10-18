@@ -1,7 +1,9 @@
 import { ObservableModel } from './ObservableModel';
+import { WaveModel } from './WaveModel';
 
 export class BoardModel extends ObservableModel {
     private _gameOver = false;
+    private _waves: WaveModel[] = [];
 
     constructor() {
         super('BoardModel');

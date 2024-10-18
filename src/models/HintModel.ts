@@ -11,7 +11,6 @@ export class HintModel extends ObservableModel {
     private _visible: boolean;
     private _state: HintState;
     private visibilityTimer: any;
-    private isInitial = true;
 
     public constructor() {
         super('HintModel');
@@ -50,14 +49,7 @@ export class HintModel extends ObservableModel {
     }
 
     public startVisibilityTimer(): void {
-        this.visibilityTimer = delayRunnable(
-            this.isInitial ? 1 : GAME_CONFIG.HintOnIdle,
-            () => (this._visible = true),
-            this,
-        );
-        if (this.isInitial) {
-            this.isInitial = false;
-        }
+        this.visibilityTimer = delayRunnable(GAME_CONFIG.HintOnIdle, () => (this._visible = true), this);
     }
 
     public stopVisibilityTimer(): void {

@@ -28,7 +28,8 @@ type SpriteConfig = {
     position?: PIXI.Point;
 };
 
-type WordConfig = {
-    question: string;
-    answer: string;
+type WaveConfig = {
+    level: number;
+    rightAnswer: string;
+    wrongAnswer: string;
 };

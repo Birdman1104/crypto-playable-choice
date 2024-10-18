@@ -1,3 +1,4 @@
+import { WAVE_CONFIG } from '../configs/WaveConfig';
 import { ObservableModel } from './ObservableModel';
 import { WaveModel } from './WaveModel';
 
@@ -19,7 +20,19 @@ export class BoardModel extends ObservableModel {
         this._gameOver = value;
     }
 
+    get waves(): WaveModel[] {
+        return this._waves;
+    }
+
+    set waves(value: WaveModel[]) {
+        this._waves = value;
+    }
+
     public initialize(): void {
-        //
+        this._waves = WAVE_CONFIG.map((waveConfig) => {
+            const wave = new WaveModel(waveConfig);
+            wave.initialize();
+            return wave;
+        });
     }
 }

@@ -1,4 +1,4 @@
-export const WaveConfig = Object.freeze([
+export const WAVE_CONFIG = Object.freeze([
     {
         level: 1,
         rightAnswer: 'NFT',

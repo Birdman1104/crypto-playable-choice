@@ -33,7 +33,3 @@ export const adStatusCtaGuard = (): boolean => {
 export const gameModelGuard = (): boolean => {
     return !!Head.gameModel;
 };
-
-export const isTutorialModeGuard = (): boolean => {
-    return !!Head.gameModel?.isTutorial;
-};

@@ -5,13 +5,12 @@ export const AdModelEvents = {
     HintUpdate: 'AdModelHintUpdate',
 };
 
-export const BoardModelEvents = { GameOverUpdate: 'BoardModelGameOverUpdate' };
+export const BoardModelEvents = { GameOverUpdate: 'BoardModelGameOverUpdate', WavesUpdate: 'BoardModelWavesUpdate' };
 
 export const CtaModelEvents = { VisibleUpdate: 'CtaModelVisibleUpdate' };
 
 export const GameModelEvents = {
     StateUpdate: 'GameModelStateUpdate',
-    IsTutorialUpdate: 'GameModelIsTutorialUpdate',
     BoardUpdate: 'GameModelBoardUpdate',
 };
 
@@ -20,3 +19,9 @@ export const HeadModelEvents = { GameModelUpdate: 'HeadModelGameModelUpdate', Ad
 export const HintModelEvents = { StateUpdate: 'HintModelStateUpdate', VisibleUpdate: 'HintModelVisibleUpdate' };
 
 export const SoundModelEvents = { StateUpdate: 'SoundModelStateUpdate' };
+
+export const WaveModelEvents = {
+    WaveLevelUpdate: 'WaveModelWaveLevelUpdate',
+    RightAnswerUpdate: 'WaveModelRightAnswerUpdate',
+    WrongAnswerUpdate: 'WaveModelWrongAnswerUpdate',
+};

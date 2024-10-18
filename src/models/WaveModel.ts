@@ -15,27 +15,27 @@ export class WaveModel extends ObservableModel {
         this.makeObservable();
     }
 
-    public get waveLevel(): number {
+    get waveLevel(): number {
         return this._waveLevel;
     }
 
-    public set waveLevel(value: number) {
+    set waveLevel(value: number) {
         this._waveLevel = value;
     }
 
-    public get rightAnswer(): string {
+    get rightAnswer(): string {
         return this._rightAnswer;
     }
 
-    public set rightAnswer(value: string) {
+    set rightAnswer(value: string) {
         this._rightAnswer = value;
     }
 
-    public get wrongAnswer(): string {
+    get wrongAnswer(): string {
         return this._wrongAnswer;
     }
 
-    public set wrongAnswer(value: string) {
+    set wrongAnswer(value: string) {
         this._wrongAnswer = value;
     }
 

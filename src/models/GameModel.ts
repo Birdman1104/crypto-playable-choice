@@ -3,16 +3,20 @@ import { ObservableModel } from './ObservableModel';
 
 export enum GameState {
     Unknown = 'Unknown',
-    Idle = 'Idle',
-    CorrectLetter = 'CorrectLetter',
-    WrongLetter = 'WrongLetter',
-    QuestionSolved = 'QuestionSolved',
+    PreActions = 'PreActions',
+    Wave1 = 'Wave1',
+    Wave1Actions = 'Wave1Actions',
+    Wave2 = 'Wave2',
+    Wave2Actions = 'Wave2Actions',
+    Wave3 = 'Wave3',
+    Wave3Actions = 'Wave3Actions',
+    Wave4 = 'Wave4',
+    Wave4Actions = 'Wave4Actions',
 }
 
 export class GameModel extends ObservableModel {
     private _state: GameState = GameState.Unknown;
     private _board: BoardModel | null = null;
-    private _isTutorial: boolean = false;
 
     constructor() {
         super('GameModel');
@@ -29,14 +33,6 @@ export class GameModel extends ObservableModel {
         this._state = value;
     }
 
-    get isTutorial(): boolean {
-        return this._isTutorial;
-    }
-
-    set isTutorial(value: boolean) {
-        this._isTutorial = value;
-    }
-
     get board(): BoardModel | null {
         return this._board;
     }
@@ -49,13 +45,8 @@ export class GameModel extends ObservableModel {
         this._state = state;
     }
 
-    public turnOffTutorialMode(): void {
-        this._isTutorial = false;
-    }
-
     public initialize(): void {
-        this._state = GameState.Idle;
-        this._isTutorial = true;
+        this._state = GameState.PreActions;
         this._board = new BoardModel();
         this._board.initialize();
     }

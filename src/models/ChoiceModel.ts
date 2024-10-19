@@ -1,7 +1,8 @@
 import { ObservableModel } from './ObservableModel';
 
 export class ChoiceModel extends ObservableModel {
-    private _choice: string;
+    private _name: string;
+    private _icon: string;
     private _price: number;
     private _reward: number | string;
     private _isCorrectAnswer: boolean;
@@ -9,7 +10,8 @@ export class ChoiceModel extends ObservableModel {
     constructor(config: ChoiceConfig) {
         super('ChoiceModel');
 
-        this._choice = config.name;
+        this._name = config.name;
+        this._icon = config.icon;
         this._price = config.price;
         this._reward = config.reward;
         this._isCorrectAnswer = config.isCorrectAnswer;
@@ -17,8 +19,12 @@ export class ChoiceModel extends ObservableModel {
         this.makeObservable();
     }
 
-    get choice(): string {
-        return this._choice;
+    get name(): string {
+        return this._name;
+    }
+
+    get icon(): string {
+        return this._icon;
     }
 
     get isCorrectAnswer(): boolean {

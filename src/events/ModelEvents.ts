@@ -5,11 +5,11 @@ export const AdModelEvents = {
     HintUpdate: 'AdModelHintUpdate',
 };
 
-export const BoardModelEvents = { GameOverUpdate: 'BoardModelGameOverUpdate', WavesUpdate: 'BoardModelWavesUpdate' };
-
-export const ChoiceModelEvents = {
-    ChoiceUpdate: 'ChoiceModelChoiceUpdate',
-    IsCorrectAnswerUpdate: 'ChoiceModelIsCorrectAnswerUpdate',
+export const BoardModelEvents = {
+    GameOverUpdate: 'BoardModelGameOverUpdate',
+    WavesUpdate: 'BoardModelWavesUpdate',
+    CurrentWaveUpdate: 'BoardModelCurrentWaveUpdate',
+    BalanceUpdate: 'BoardModelBalanceUpdate',
 };
 
 export const CtaModelEvents = { VisibleUpdate: 'CtaModelVisibleUpdate' };

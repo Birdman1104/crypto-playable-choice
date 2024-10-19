@@ -39,4 +39,5 @@ type ChoiceConfig = {
     price: number;
     reward: string | number;
     isCorrectAnswer: boolean;
+    icon: string;
 };

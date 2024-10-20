@@ -1,12 +1,13 @@
 import { lego } from '@armathai/lego';
 import { GameState } from '../models/GameModel';
 import Head from '../models/HeadModel';
-import { setGameStateCommand } from './Commands';
-import { isRightChoiceGuard } from './GameLogicGuards';
+import { setGameStateCommand, showCtaCommand } from './Commands';
+import { isRightChoiceGuard, isWrongChoiceGuard } from './GameLogicGuards';
 
 export const onChoiceClickCommand = (name: string): void => {
     lego.command.payload(name).execute(setChoiceToClickedCommand);
     lego.command.payload(name).guard(isRightChoiceGuard).execute(onRightChoiceCommand);
+    lego.command.payload(name).guard(isWrongChoiceGuard).execute(onWrongChoiceCommand);
 };
 
 const setChoiceToClickedCommand = (name: string): void => {
@@ -45,6 +46,10 @@ const onRightChoiceCommand = () => {
     lego.command.payload(nextState).execute(setGameStateCommand);
 };
 
+const onWrongChoiceCommand = () => {
+    lego.command.payload(GameState.Fail).execute(setGameStateCommand);
+};
+
 export const onPreActionsCompleteCommand = (): void => {
     lego.command.payload(GameState.Wave1).execute(setGameStateCommand);
 };
@@ -74,7 +79,9 @@ export const onGameStateUpdateCommand = (state: GameState): void => {
         case GameState.Wave4:
             lego.command.execute(startNextWaveCommand);
             break;
-
+        case GameState.Fail:
+            lego.command.execute(showCtaCommand);
+            break;
         default:
             break;
     }

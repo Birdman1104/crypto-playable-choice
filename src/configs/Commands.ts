@@ -107,7 +107,7 @@ export const onAdStatusUpdateCommand = (status: AdStatus): void => {
 };
 
 export const setGameStateCommand = (state: GameState): void => Head.gameModel?.setState(state);
-const showCtaCommand = (): void => Head.ad?.cta?.show();
+export const showCtaCommand = (): void => Head.ad?.cta?.show();
 
 export const onGameOverUpdateCommand = (): void => {
     lego.command.execute(showCtaCommand);

@@ -78,8 +78,6 @@ export class BoardModel extends ObservableModel {
     }
 
     public isRightChoice(name: string): boolean {
-        console.warn('is ', name, 'right choice, ', this._currentWave.rightAnswer.name === name);
-
         return this._currentWave.rightAnswer.name === name;
     }
 

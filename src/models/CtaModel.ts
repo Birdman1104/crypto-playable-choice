@@ -22,7 +22,7 @@ export class CtaModel extends ObservableModel {
         super.destroy();
     }
 
-    public show(delay = 0): void {
+    public show(): void {
         this._visible = true;
     }
 }

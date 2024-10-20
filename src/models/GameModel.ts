@@ -3,6 +3,7 @@ import { ObservableModel } from './ObservableModel';
 
 export enum GameState {
     Unknown = 'Unknown',
+    Fail = 'Fail',
     PreActions = 'PreActions',
     Wave1 = 'Wave1',
     Wave1Actions = 'Wave1Actions',
@@ -13,6 +14,20 @@ export enum GameState {
     Wave4 = 'Wave4',
     Wave4Actions = 'Wave4Actions',
 }
+
+// export const WaveGT;
+
+export const getWaveActionStateFromWaveLevel = (waveLevel: number): GameState => {
+    const WaveActionsLevelToGameState = [
+        GameState.PreActions,
+        GameState.Wave1Actions,
+        GameState.Wave2Actions,
+        GameState.Wave3Actions,
+        GameState.Wave4Actions,
+    ];
+
+    return WaveActionsLevelToGameState[waveLevel] || GameState.Unknown;
+};
 
 export class GameModel extends ObservableModel {
     private _state: GameState = GameState.Unknown;

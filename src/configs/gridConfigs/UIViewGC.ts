@@ -13,11 +13,15 @@ const getUIGridLandscapeConfig = () => {
         cells: [
             {
                 name: 'phone_show',
-                bounds: { x: 0, y: 0, width: 1, height: 1 },
+                bounds: { x: 0, y: 0.3, width: 1, height: 1 },
             },
             {
                 name: 'phone_hide',
                 bounds: { x: 0, y: 1, width: 1, height: 1 },
+            },
+            {
+                name: 'money_bar',
+                bounds: { x: 0, y: 0, width: 1, height: 0.2 },
             },
         ],
     };
@@ -32,11 +36,15 @@ const getUIGridPortraitConfig = () => {
         cells: [
             {
                 name: 'phone_show',
-                bounds: { x: 0, y: 0, width: 1, height: 1 },
+                bounds: { x: 0, y: 0.3, width: 1, height: 1 },
             },
             {
                 name: 'phone_hide',
                 bounds: { x: 0, y: 1, width: 1, height: 1 },
+            },
+            {
+                name: 'money_bar',
+                bounds: { x: 0, y: 0, width: 1, height: 0.2 },
             },
         ],
     };

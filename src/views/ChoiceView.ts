@@ -7,6 +7,7 @@ export class ChoiceView extends Container {
     private icon: Sprite;
     private price: Sprite;
     private text: Sprite;
+    private canEmit = true;
 
     constructor(private config: ChoiceConfig) {
         super();
@@ -14,8 +15,9 @@ export class ChoiceView extends Container {
         this.build();
     }
 
-    public updateChoices(): void {
-        //
+    public disable(): void {
+        this.canEmit = false;
+        this.alpha = 0.7;
     }
 
     private build(): void {
@@ -27,6 +29,10 @@ export class ChoiceView extends Container {
 
     private buildBkg(): void {
         this.bkg = makeSprite({ texture: Images['game/choice_bkg'] });
+        this.bkg.interactive = true;
+        this.bkg.on('pointerdown', () => {
+            this.canEmit && this.emit('choiceClick', this.config.name);
+        });
         this.addChild(this.bkg);
     }
 

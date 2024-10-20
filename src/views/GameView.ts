@@ -1,7 +1,9 @@
 import { ICellConfig, PixiGrid } from '@armathai/pixi-grid';
 import { getGameViewGridConfig } from '../configs/gridConfigs/GameViewGC';
+import { BoardView } from './BoardView';
 
 export class GameView extends PixiGrid {
+    private board: BoardView;
 
     constructor() {
         super();
@@ -22,6 +24,7 @@ export class GameView extends PixiGrid {
     }
 
     private build(): void {
-        //
+        this.board = new BoardView();
+        this.setChild('board', this.board);
     }
 }

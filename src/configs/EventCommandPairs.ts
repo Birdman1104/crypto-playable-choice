@@ -1,14 +1,22 @@
 import { lego } from '@armathai/lego';
-import { MainGameEvents, TakeMe } from '../events/MainEvents';
+import { BoardViewEvents, MainGameEvents, PhoneViewEvents, TakeMe } from '../events/MainEvents';
 import { AdModelEvents, BoardModelEvents, GameModelEvents } from '../events/ModelEvents';
 import {
     onAdStatusUpdateCommand,
     onGameOverUpdateCommand,
-    onGameStateUpdateCommand,
     onMainViewReadyCommand,
     resizeCommand,
-    takeToStoreCommand
+    takeToStoreCommand,
 } from './Commands';
+import {
+    onChoiceClickCommand,
+    onGameStateUpdateCommand,
+    onPreActionsCompleteCommand,
+    onWave1ActionsCompleteCommand,
+    onWave2ActionsCompleteCommand,
+    onWave3ActionsCompleteCommand,
+    onWave4ActionsCompleteCommand,
+} from './GameLogicCommands';
 
 export const mapCommands = () => {
     eventCommandPairs.forEach(({ event, command }) => {
@@ -46,5 +54,29 @@ const eventCommandPairs = Object.freeze([
     {
         event: TakeMe.ToStore,
         command: takeToStoreCommand,
+    },
+    {
+        event: BoardViewEvents.PreActionsComplete,
+        command: onPreActionsCompleteCommand,
+    },
+    {
+        event: BoardViewEvents.Wave1ActionsComplete,
+        command: onWave1ActionsCompleteCommand,
+    },
+    {
+        event: BoardViewEvents.Wave2ActionsComplete,
+        command: onWave2ActionsCompleteCommand,
+    },
+    {
+        event: BoardViewEvents.Wave3ActionsComplete,
+        command: onWave3ActionsCompleteCommand,
+    },
+    {
+        event: BoardViewEvents.Wave4ActionsComplete,
+        command: onWave4ActionsCompleteCommand,
+    },
+    {
+        event: PhoneViewEvents.ChoiceClick,
+        command: onChoiceClickCommand,
     },
 ]);

@@ -6,6 +6,7 @@ export class ChoiceModel extends ObservableModel {
     private _price: number;
     private _reward: number | string;
     private _isCorrectAnswer: boolean;
+    private _isClicked = false;
 
     constructor(config: ChoiceConfig) {
         super('ChoiceModel');
@@ -37,6 +38,14 @@ export class ChoiceModel extends ObservableModel {
 
     get reward(): number | string {
         return this._reward;
+    }
+
+    get isClicked(): boolean {
+        return this._isClicked;
+    }
+
+    set isClicked(value: boolean) {
+        this._isClicked = value;
     }
 
     public init(): void {

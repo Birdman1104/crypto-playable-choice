@@ -1,5 +1,7 @@
+import { lego } from '@armathai/lego';
 import { Container, Sprite } from 'pixi.js';
 import { Images } from '../assets';
+import { PhoneViewEvents } from '../events/MainEvents';
 import { ChoiceModel } from '../models/ChoiceModel';
 import { makeSprite } from '../utils';
 import { ChoiceView } from './ChoiceView';
@@ -16,6 +18,11 @@ export class PhoneView extends Container {
     }
 
     public updateChoices(choices: { right: ChoiceModel; wrong: ChoiceModel }): void {
+        this.destroyChoices();
+        this.buildChoices(choices);
+    }
+
+    private buildChoices(choices: { right: ChoiceModel; wrong: ChoiceModel }): void {
         const rnd = Math.random() > 0.5;
         this.buildChoice(choices.right, rnd);
         this.buildChoice(choices.wrong, !rnd);
@@ -26,6 +33,11 @@ export class PhoneView extends Container {
         const choiceView = new ChoiceView(config);
         const x = isOnLeft ? -300 : 100;
         choiceView.position.set(x, 0);
+        choiceView.on('choiceClick', (name) => {
+            lego.event.emit(PhoneViewEvents.ChoiceClick, name);
+            this.leftChoice?.disable();
+            this.rightChoice?.disable();
+        });
         this.addChild(choiceView);
 
         if (isOnLeft) {
@@ -42,6 +54,11 @@ export class PhoneView extends Container {
     private buildPhone(): void {
         this.phone = makeSprite({ texture: Images['game/phone'] });
         this.addChild(this.phone);
+    }
+
+    private destroyChoices(): void {
+        this.rightChoice?.destroy();
+        this.leftChoice?.destroy();
     }
 }
 

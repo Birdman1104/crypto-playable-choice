@@ -14,7 +14,7 @@ export class ForegroundView extends PixiGrid {
 
         lego.event
             .on(AdModelEvents.StatusUpdate, this.onStatusUpdate, this)
-            .on(GameModelEvents.StateUpdate, this.onGameStateUpdateCommand, this)
+            .on(GameModelEvents.StateUpdate, this.onGameStateUpdate, this)
             .on(AdModelEvents.HintUpdate, this.onHintUpdate, this);
     }
 
@@ -63,7 +63,7 @@ export class ForegroundView extends PixiGrid {
         this.hint = null;
     }
 
-    private onGameStateUpdateCommand(state: GameState): void {
+    private onGameStateUpdate(state: GameState): void {
         //
     }
 }

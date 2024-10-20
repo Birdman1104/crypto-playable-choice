@@ -43,4 +43,20 @@ export class WaveModel extends ObservableModel {
     public init(): void {
         //
     }
+
+    public getAnswerByName(name: string): ChoiceModel | null {
+        return this.rightAnswer.name === name
+            ? this.rightAnswer
+            : this.wrongAnswer.name === name
+            ? this.wrongAnswer
+            : null;
+    }
+
+    public getAnswerByUUID(uuid: string): ChoiceModel | null {
+        return this.rightAnswer.uuid === uuid
+            ? this.rightAnswer
+            : this.wrongAnswer.uuid === uuid
+            ? this.wrongAnswer
+            : null;
+    }
 }

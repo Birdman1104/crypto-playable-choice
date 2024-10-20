@@ -4,13 +4,7 @@ import { GameState } from '../models/GameModel';
 import Head from '../models/HeadModel';
 import { HintState } from '../models/HintModel';
 import { unMapCommands } from './EventCommandPairs';
-import {
-    ctaModelGuard,
-    gameModelGuard,
-    hintModelGuard,
-    hintParamGuard,
-    soundParamGuard
-} from './Guards';
+import { ctaModelGuard, gameModelGuard, hintModelGuard, hintParamGuard, soundParamGuard } from './Guards';
 
 export const initAdModelCommand = (): void => Head.initializeADModel();
 
@@ -34,7 +28,6 @@ const stopIdleTimerCommand = (): void => Head.ad?.stopIdleTimer();
 const setHintStateCommand = (state: HintState): void => Head.ad?.hint?.setState(state);
 const startHintVisibilityTimerCommand = (): void => Head.ad?.hint?.startVisibilityTimer();
 const stopHintVisibilityTimerCommand = (): void => Head.ad?.hint?.stopVisibilityTimer();
-
 
 const initializeModelsCommand = (): void => {
     lego.command
@@ -113,28 +106,12 @@ export const onAdStatusUpdateCommand = (status: AdStatus): void => {
     }
 };
 
-const setGameStateCommand = (state: GameState): void => Head.gameModel?.setState(state);
+export const setGameStateCommand = (state: GameState): void => Head.gameModel?.setState(state);
 const showCtaCommand = (): void => Head.ad?.cta?.show();
 
-const turnOffTutorialModeCommand = (): void => Head.gameModel?.turnOffTutorialMode();
-
-export const onGameStateUpdateCommand = (state: GameState): void => {
-    switch (state) {
-        case GameState.Idle:
-//
-            break;
-
-
-
-        default:
-            break;
-    }
-};
-
-
 export const onGameOverUpdateCommand = (): void => {
-    lego.command.execute(showCtaCommand)
-}
+    lego.command.execute(showCtaCommand);
+};
 
 export const resizeCommand = (): void => {
     lego.command

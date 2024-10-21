@@ -4,10 +4,12 @@ import { Images } from '../assets';
 import { BoardViewEvents } from '../events/MainEvents';
 import { GameModelEvents } from '../events/ModelEvents';
 import { GameState } from '../models/GameModel';
-import { drawBounds, makeSprite } from '../utils';
+import { makeSprite } from '../utils';
+import { PoorGuy } from './Characters/PoorGuy';
 
 export class BoardView extends Container {
     private bkg: Sprite;
+    private poorGuy: PoorGuy;
 
     constructor() {
         super();
@@ -16,7 +18,7 @@ export class BoardView extends Container {
 
         this.build();
 
-        drawBounds(this);
+        // drawBounds(this);
     }
 
     public getBounds(skipUpdate?: boolean | undefined, rect?: PIXI.Rectangle | undefined): Rectangle {
@@ -25,12 +27,19 @@ export class BoardView extends Container {
 
     private build(): void {
         this.buildBkg();
+        this.buildPoorGuy();
     }
 
     private buildBkg(): void {
         this.bkg = makeSprite({ texture: Images['game/bkg'] });
         this.bkg.position.set(this.width / 2, this.height / 2);
         this.addChild(this.bkg);
+    }
+
+    private buildPoorGuy(): void {
+        this.poorGuy = new PoorGuy();
+        this.poorGuy.position.set(this.width / 2, this.height / 2);
+        this.addChild(this.poorGuy);
     }
 
     private onStateUpdate(newState: GameState, oldState: GameState): void {

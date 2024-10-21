@@ -1,6 +1,8 @@
+import { lego } from '@armathai/lego';
 import anime from 'animejs';
 import { Container, Sprite } from 'pixi.js';
 import { Images } from '../assets';
+import { BoardViewEvents } from '../events/MainEvents';
 import { makeSprite } from '../utils';
 
 export class House extends Container {
@@ -13,6 +15,7 @@ export class House extends Container {
     private layer7: Sprite;
     private layer8: Sprite;
     private layer9: Sprite;
+    private gf: Sprite;
     private house: Sprite;
 
     constructor() {
@@ -32,20 +35,26 @@ export class House extends Container {
             this.layer9,
             this.layer1,
             this.layer2,
+            this.gf,
         ].forEach((layer, i) => {
             anime({
                 targets: layer.scale,
-                x: 1,
-                y: 1,
+                x: i === 9 ? -0.7 : 1,
+                y: i === 9 ? 0.7 : 1,
                 duration: 300,
                 delay: i * 100,
                 complete: () => {
-                    if (i === 8) {
+                    if (i === 9) {
                         anime({
                             targets: this.house,
                             alpha: 1,
                             duration: 400,
                             easing: 'linear',
+                            complete: () => {
+                                setTimeout(() => {
+                                    lego.event.emit(BoardViewEvents.Wave3ActionsComplete);
+                                }, 500);
+                            },
                         });
                     }
                 },
@@ -93,6 +102,10 @@ export class House extends Container {
         this.house = makeSprite({ texture: Images['house/house'] });
         this.addChild(this.house);
 
+        this.gf = makeSprite({ texture: Images['house/gf'] });
+        this.gf.position.set(-75, 116);
+        this.addChild(this.gf);
+
         [
             this.layer1,
             this.layer2,
@@ -103,6 +116,7 @@ export class House extends Container {
             this.layer7,
             this.layer8,
             this.layer9,
+            this.gf,
         ].forEach((layer) => {
             layer.scale.set(0);
         });

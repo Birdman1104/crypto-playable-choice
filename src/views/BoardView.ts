@@ -8,12 +8,14 @@ import { GameState } from '../models/GameModel';
 import { delayRunnable, makeSprite } from '../utils';
 import { MainGuy } from './Characters/MainGuy';
 import { PoorGuy } from './Characters/PoorGuy';
+import { House } from './House';
 
 export class BoardView extends Container {
     private bkg: Sprite;
     private poorGuy: PoorGuy;
     private mainGuy: MainGuy;
     private car: Sprite;
+    private house: House;
 
     constructor() {
         super();
@@ -32,7 +34,7 @@ export class BoardView extends Container {
     private build(): void {
         this.buildBkg();
         this.buildCar();
-        // delayRunnable(2, () => this.showCar());
+        this.buildHouse();
         // this.buildMainGuy();
         // this.buildPoorGuy();
     }
@@ -48,6 +50,12 @@ export class BoardView extends Container {
         this.car.position.set(-1500, 420);
         this.car.alpha = 0;
         this.addChild(this.car);
+    }
+
+    private buildHouse(): void {
+        this.house = new House();
+        this.house.position.set(420, 266);
+        this.addChild(this.house);
     }
 
     private buildPoorGuy(): void {
@@ -81,9 +89,7 @@ export class BoardView extends Container {
 
                 break;
             case GameState.Wave3Actions:
-                setTimeout(() => {
-                    lego.event.emit(BoardViewEvents.Wave3ActionsComplete);
-                }, 500);
+                this.showHouse();
                 break;
             case GameState.Wave4Actions:
                 setTimeout(() => {
@@ -94,6 +100,10 @@ export class BoardView extends Container {
             default:
                 break;
         }
+    }
+
+    private showHouse(): void {
+        this.house.show();
     }
 
     private showCar(): void {

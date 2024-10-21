@@ -14,7 +14,17 @@ const getGameViewGridLandscapeConfig = () => {
         bounds,
         cells: [
             {
+                name: 'sky',
+                scale: CellScale.fill,
+                bounds: { x: 0, y: 0, width: 1, height: 0.5 },
+            },
+            {
                 name: 'board',
+                scale: CellScale.showAll,
+                bounds: { x: 0, y: 0, width: 1, height: 1 },
+            },
+            {
+                name: 'preaction',
                 scale: CellScale.showAll,
                 bounds: { x: 0, y: 0, width: 1, height: 1 },
             },
@@ -31,7 +41,18 @@ const getGameViewGridPortraitConfig = () => {
         bounds,
         cells: [
             {
+                name: 'sky',
+                scale: CellScale.fill,
+                bounds: { x: 0, y: 0, width: 1, height: 0.5 },
+            },
+            {
                 name: 'board',
+                scale: CellScale.showAll,
+                bounds: { x: 0, y: 0, width: 1, height: 1 },
+            },
+            {
+                name: 'preaction',
+                scale: CellScale.showAll,
                 bounds: { x: 0, y: 0, width: 1, height: 1 },
             },
         ],

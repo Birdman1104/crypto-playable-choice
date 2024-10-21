@@ -4,9 +4,10 @@ export const assets = {
     images: {
         'game/bitcoin.png': require('../assets/images/game/bitcoin.png').default,
         'game/bitcoin_clicked.png': require('../assets/images/game/bitcoin_clicked.png').default,
+        'game/bkg.png': require('../assets/images/game/bkg.png').default,
         'game/burger.png': require('../assets/images/game/burger.png').default,
         'game/burger_clicked.png': require('../assets/images/game/burger_clicked.png').default,
-        'game/choice_bkg.png': require('../assets/images/game/choice_bkg.png').default,
+        'game/car.png': require('../assets/images/game/car.png').default,
         'game/crypto_wallet.png': require('../assets/images/game/crypto_wallet.png').default,
         'game/crypto_wallet_clicked.png': require('../assets/images/game/crypto_wallet_clicked.png').default,
         'game/eth.png': require('../assets/images/game/eth.png').default,
@@ -34,9 +35,10 @@ export const assets = {
 export const Images = {
     'game/bitcoin': 'game/bitcoin.png',
     'game/bitcoin_clicked': 'game/bitcoin_clicked.png',
+    'game/bkg': 'game/bkg.png',
     'game/burger': 'game/burger.png',
     'game/burger_clicked': 'game/burger_clicked.png',
-    'game/choice_bkg': 'game/choice_bkg.png',
+    'game/car': 'game/car.png',
     'game/crypto_wallet': 'game/crypto_wallet.png',
     'game/crypto_wallet_clicked': 'game/crypto_wallet_clicked.png',
     'game/eth': 'game/eth.png',

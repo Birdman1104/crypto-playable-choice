@@ -1,19 +1,36 @@
 import { lego } from '@armathai/lego';
-import { Container } from 'pixi.js';
+import { Container, Rectangle, Sprite } from 'pixi.js';
+import { Images } from '../assets';
 import { BoardViewEvents } from '../events/MainEvents';
 import { GameModelEvents } from '../events/ModelEvents';
 import { GameState } from '../models/GameModel';
+import { drawBounds, makeSprite } from '../utils';
 
 export class BoardView extends Container {
+    private bkg: Sprite;
+
     constructor() {
         super();
 
         lego.event.on(GameModelEvents.StateUpdate, this.onStateUpdate, this);
+
         this.build();
+
+        drawBounds(this);
+    }
+
+    public getBounds(skipUpdate?: boolean | undefined, rect?: PIXI.Rectangle | undefined): Rectangle {
+        return new Rectangle(0, 0, 700, 500);
     }
 
     private build(): void {
-        //
+        this.buildBkg();
+    }
+
+    private buildBkg(): void {
+        this.bkg = makeSprite({ texture: Images['game/bkg'] });
+        this.bkg.position.set(this.width / 2, this.height / 2);
+        this.addChild(this.bkg);
     }
 
     private onStateUpdate(newState: GameState, oldState: GameState): void {

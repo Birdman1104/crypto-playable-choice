@@ -16,7 +16,7 @@ export class FailView extends Container {
     }
 
     public getBounds(skipUpdate?: boolean | undefined, rect?: PIXI.Rectangle | undefined): Rectangle {
-        return new Rectangle(0, 0, 550, 550);
+        return new Rectangle(0, 0, 800, 800);
     }
 
     public show(): void {
@@ -26,8 +26,8 @@ export class FailView extends Container {
     private showFail(): void {
         anime({
             targets: this.fail.scale,
-            x: 1.2,
-            y: 1.2,
+            x: 0.8,
+            y: 0.8,
             duration: 300,
             easing: 'easeInOutSine',
             complete: () => this.showTryAgain(),
@@ -37,8 +37,8 @@ export class FailView extends Container {
     private showTryAgain(): void {
         anime({
             targets: this.tryAgain.scale,
-            x: 1,
-            y: 1,
+            x: 1.2,
+            y: 1.2,
             duration: 300,
             easing: 'easeInOutSine',
             complete: () => this.pulseTryAgain(),
@@ -49,8 +49,8 @@ export class FailView extends Container {
         this.canEmit = true;
         anime({
             targets: this.tryAgain.scale,
-            x: 1.1,
-            y: 1.1,
+            x: 1.35,
+            y: 1.35,
             duration: 200,
             direction: 'alternate',
             loop: true,

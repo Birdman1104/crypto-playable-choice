@@ -33,7 +33,7 @@ class App extends Application {
         globalThis.__PIXI_APP__ = this;
         if (process.env.NODE_ENV !== 'production') {
             this.initStats();
-            this.initLego();
+            // this.initLego();
         }
         this.loadAssets();
     }

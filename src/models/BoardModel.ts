@@ -59,6 +59,7 @@ export class BoardModel extends ObservableModel {
             wave.initialize();
             return wave;
         });
+        this._balance = 50;
         this._currentWave = this._waves[this._currentLevelNumber];
     }
 

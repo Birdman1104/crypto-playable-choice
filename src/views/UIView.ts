@@ -5,10 +5,12 @@ import { BoardModelEvents, GameModelEvents } from '../events/ModelEvents';
 import { GameState } from '../models/GameModel';
 import { WaveModel } from '../models/WaveModel';
 import { tweenToCell } from '../utils';
+import { MoneyBar } from './MoneyBarView';
 import { PhoneView } from './PhoneView';
 
 export class UIView extends PixiGrid {
     private phone: PhoneView;
+    private moneyBar: MoneyBar;
 
     constructor() {
         super();
@@ -30,6 +32,7 @@ export class UIView extends PixiGrid {
 
     private build(): void {
         this.buildPhone();
+        this.buildMoneyBar();
     }
 
     private onCurrentWaveUpdate({ rightAnswer, wrongAnswer }: WaveModel): void {
@@ -40,6 +43,11 @@ export class UIView extends PixiGrid {
     private buildPhone(): void {
         this.phone = new PhoneView();
         this.setChild('phone_hide', this.phone);
+    }
+
+    private buildMoneyBar(): void {
+        this.moneyBar = new MoneyBar();
+        this.setChild('money_bar', this.moneyBar);
     }
 
     private onStateUpdate(newState): void {

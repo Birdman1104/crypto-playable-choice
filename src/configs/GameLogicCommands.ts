@@ -6,13 +6,24 @@ import { isRightChoiceGuard, isWrongChoiceGuard } from './GameLogicGuards';
 import { reachedFinalWaveGuard } from './Guards';
 
 export const onChoiceClickCommand = (name: string): void => {
-    lego.command.guard(reachedFinalWaveGuard).execute(takeToStoreCommand);
-    lego.command.guard(lego.not(reachedFinalWaveGuard)).payload(name).execute(setChoiceToClickedCommand);
+    lego.command
+        .guard(reachedFinalWaveGuard)
+        .execute(takeToStoreCommand)
+
+        .guard(lego.not(reachedFinalWaveGuard))
+        .payload(name)
+        .execute(setChoiceToClickedCommand);
 };
 
 export const onChoiceClickAnimationCommand = (name: string): void => {
-    lego.command.payload(name).guard(isRightChoiceGuard).execute(onRightChoiceCommand);
-    lego.command.payload(name).guard(isWrongChoiceGuard).execute(onWrongChoiceCommand);
+    lego.command
+        .payload(name)
+        .guard(isRightChoiceGuard)
+        .execute(onRightChoiceCommand)
+
+        .payload(name)
+        .guard(isWrongChoiceGuard)
+        .execute(onWrongChoiceCommand);
 };
 
 const setChoiceToClickedCommand = (name: string): void => {
@@ -29,6 +40,8 @@ const onRightChoiceCommand = () => {
     if (currentWaveNumber === null || currentWaveNumber === undefined) return;
 
     let nextState = GameState.Fail;
+
+    lego.command.execute(updateBalanceCommand);
 
     switch (currentState) {
         case GameState.Wave1:
@@ -74,6 +87,13 @@ export const onWave4ActionsCompleteCommand = (): void => {
 
 const startNextWaveCommand = (): void => {
     Head.gameModel?.board?.startNextWave();
+};
+
+const updateBalanceCommand = (): void => {
+    const currentWave = Head.gameModel?.board?.currentWave;
+    if (!currentWave) return;
+    const rightChoice = currentWave.rightAnswer;
+    Head.gameModel?.board?.updateBalance(rightChoice.reward);
 };
 
 export const onGameStateUpdateCommand = (state: GameState): void => {

@@ -1,11 +1,16 @@
 import { lego } from '@armathai/lego';
 import { GameState } from '../models/GameModel';
 import Head from '../models/HeadModel';
-import { setGameStateCommand, showCtaCommand } from './Commands';
+import { setGameStateCommand, showCtaCommand, takeToStoreCommand } from './Commands';
 import { isRightChoiceGuard, isWrongChoiceGuard } from './GameLogicGuards';
+import { reachedFinalWaveGuard } from './Guards';
 
 export const onChoiceClickCommand = (name: string): void => {
-    lego.command.payload(name).execute(setChoiceToClickedCommand);
+    lego.command.guard(reachedFinalWaveGuard).execute(takeToStoreCommand);
+    lego.command.guard(lego.not(reachedFinalWaveGuard)).payload(name).execute(setChoiceToClickedCommand);
+};
+
+export const onChoiceClickAnimationCommand = (name: string): void => {
     lego.command.payload(name).guard(isRightChoiceGuard).execute(onRightChoiceCommand);
     lego.command.payload(name).guard(isWrongChoiceGuard).execute(onWrongChoiceCommand);
 };

@@ -12,6 +12,8 @@ export const BoardModelEvents = {
     BalanceUpdate: 'BoardModelBalanceUpdate',
 };
 
+export const ChoiceModelEvents = { IsClickedUpdate: 'ChoiceModelIsClickedUpdate' };
+
 export const CtaModelEvents = { VisibleUpdate: 'CtaModelVisibleUpdate' };
 
 export const GameModelEvents = { StateUpdate: 'GameModelStateUpdate', BoardUpdate: 'GameModelBoardUpdate' };

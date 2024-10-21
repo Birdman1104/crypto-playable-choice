@@ -33,3 +33,11 @@ export const adStatusCtaGuard = (): boolean => {
 export const gameModelGuard = (): boolean => {
     return !!Head.gameModel;
 };
+
+export const reachedFinalWaveGuard = (): boolean => {
+    if (Head.gameModel && Head.gameModel.board) {
+        return Head.gameModel?.board?.currentLevelNumber + 1 === GAME_CONFIG.waveToStore;
+    } else {
+        return false;
+    }
+};

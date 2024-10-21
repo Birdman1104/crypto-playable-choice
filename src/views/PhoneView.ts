@@ -2,6 +2,7 @@ import { lego } from '@armathai/lego';
 import { Container, Sprite } from 'pixi.js';
 import { Images } from '../assets';
 import { PhoneViewEvents } from '../events/MainEvents';
+import { ChoiceModelEvents } from '../events/ModelEvents';
 import { ChoiceModel } from '../models/ChoiceModel';
 import { makeSprite } from '../utils';
 import { ChoiceView } from './ChoiceView';
@@ -13,6 +14,8 @@ export class PhoneView extends Container {
 
     constructor() {
         super();
+
+        lego.event.on(ChoiceModelEvents.IsClickedUpdate, this.onChoiceClick, this);
 
         this.build();
     }
@@ -30,13 +33,15 @@ export class PhoneView extends Container {
 
     private buildChoice(choice: ChoiceModel, isOnLeft: boolean): void {
         const config: ChoiceConfig = extractChoiceConfigFromModel(choice);
-        const choiceView = new ChoiceView(config);
-        const x = isOnLeft ? -300 : 100;
-        choiceView.position.set(x, 0);
+        const choiceView = new ChoiceView(config, choice.uuid);
+        choiceView.scale.set(0.7);
+        const x = isOnLeft ? -80 : 80;
+        choiceView.position.set(x, -150);
         choiceView.on('choiceClick', (name) => {
             lego.event.emit(PhoneViewEvents.ChoiceClick, name);
-            this.leftChoice?.disable();
-            this.rightChoice?.disable();
+        });
+        choiceView.on('clickAnimationComplete', (name) => {
+            lego.event.emit(PhoneViewEvents.ClickAnimationComplete, name);
         });
         this.addChild(choiceView);
 
@@ -59,6 +64,20 @@ export class PhoneView extends Container {
     private destroyChoices(): void {
         this.rightChoice?.destroy();
         this.leftChoice?.destroy();
+    }
+
+    private onChoiceClick(clicked: boolean, wasClicked: boolean, uuid: string): void {
+        const choice = this.getChoiceByUUID(uuid);
+        if (!choice) return;
+        this.leftChoice?.disable();
+        this.rightChoice?.disable();
+        choice.animateClick();
+    }
+
+    private getChoiceByUUID(uuid: string): ChoiceView | null {
+        if (this.rightChoice.uuid === uuid) return this.rightChoice;
+        if (this.leftChoice.uuid === uuid) return this.leftChoice;
+        return null;
     }
 }
 

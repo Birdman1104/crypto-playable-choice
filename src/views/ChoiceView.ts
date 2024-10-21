@@ -9,7 +9,7 @@ export class ChoiceView extends Container {
     private canEmit = true;
     private canAnimate = true;
 
-    constructor(private config: ChoiceConfig) {
+    constructor(private config: ChoiceConfig, public readonly uuid: string) {
         super();
 
         this.build();
@@ -17,7 +17,20 @@ export class ChoiceView extends Container {
 
     public disable(): void {
         this.canEmit = false;
-        // this.alpha = 0.7;
+    }
+
+    public animateClick(): void {
+        if (this.canAnimate) {
+            this.canAnimate = false;
+            anime({
+                targets: this.choice.scale,
+                x: 0.7,
+                y: 0.7,
+                easing: 'easeInOutSine',
+                duration: 150,
+                complete: () => this.switchChoices(),
+            });
+        }
     }
 
     private build(): void {
@@ -29,8 +42,7 @@ export class ChoiceView extends Container {
         this.choice = makeSprite({ texture: Images[`game/${this.config.icon}`] });
         this.choice.interactive = true;
         this.choice.on('pointerdown', () => {
-            this.canAnimate && this.animateClick();
-            this.canAnimate = false;
+            this.canEmit && this.emit('choiceClick', this.config.name);
         });
         this.addChild(this.choice);
     }
@@ -42,17 +54,6 @@ export class ChoiceView extends Container {
         this.clickedChoice.scale.set(0.7);
 
         this.addChild(this.clickedChoice);
-    }
-
-    private animateClick(): void {
-        anime({
-            targets: this.choice.scale,
-            x: 0.7,
-            y: 0.7,
-            easing: 'easeInOutSine',
-            duration: 150,
-            complete: () => this.switchChoices(),
-        });
     }
 
     private switchChoices(): void {
@@ -80,7 +81,7 @@ export class ChoiceView extends Container {
             easing: 'easeInOutSine',
             duration: 150,
             complete: () => {
-                this.canEmit && this.emit('choiceClick', this.config.name);
+                this.emit('clickAnimationComplete', this.config.name);
             },
         });
     }

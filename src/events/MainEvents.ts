@@ -18,6 +18,7 @@ export const TakeMe = Object.freeze({
 
 export const PhoneViewEvents = Object.freeze({
     ChoiceClick: 'PhoneViewEventsChoiceClick',
+    ClickAnimationComplete: 'PhoneViewEventsClickAnimationComplete',
 });
 
 export const BoardViewEvents = Object.freeze({

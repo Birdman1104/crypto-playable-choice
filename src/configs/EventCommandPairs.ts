@@ -9,6 +9,7 @@ import {
     takeToStoreCommand,
 } from './Commands';
 import {
+    onChoiceClickAnimationCommand,
     onChoiceClickCommand,
     onGameStateUpdateCommand,
     onPreActionsCompleteCommand,
@@ -78,5 +79,9 @@ const eventCommandPairs = Object.freeze([
     {
         event: PhoneViewEvents.ChoiceClick,
         command: onChoiceClickCommand,
+    },
+    {
+        event: PhoneViewEvents.ClickAnimationComplete,
+        command: onChoiceClickAnimationCommand,
     },
 ]);

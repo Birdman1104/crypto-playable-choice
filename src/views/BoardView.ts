@@ -6,6 +6,7 @@ import { BoardViewEvents } from '../events/MainEvents';
 import { GameModelEvents } from '../events/ModelEvents';
 import { GameState } from '../models/GameModel';
 import { delayRunnable, makeSprite } from '../utils';
+import { Bubble } from './Bubble';
 import { MainGuy } from './Characters/MainGuy';
 import { PoorGuy } from './Characters/PoorGuy';
 import { House } from './House';
@@ -16,6 +17,7 @@ export class BoardView extends Container {
     private mainGuy: MainGuy;
     private car: Sprite;
     private house: House;
+    private bubble: Bubble;
 
     constructor() {
         super();
@@ -36,7 +38,8 @@ export class BoardView extends Container {
         this.buildCar();
         this.buildHouse();
         // this.buildMainGuy();
-        // this.buildPoorGuy();
+        this.buildPoorGuy();
+        this.buildBubble();
     }
 
     private buildBkg(): void {
@@ -60,13 +63,23 @@ export class BoardView extends Container {
 
     private buildPoorGuy(): void {
         this.poorGuy = new PoorGuy();
-        this.poorGuy.position.set(this.width / 2, this.height / 2);
+        this.poorGuy.position.set(150, 375);
+        this.poorGuy.scale.set(0.4);
         this.addChild(this.poorGuy);
+    }
+
+    private buildBubble(): void {
+        this.bubble = new Bubble();
+        this.bubble.position.set(this.poorGuy.x + 25, this.poorGuy.y - 90);
+        this.bubble.scale.set(0.8);
+        delayRunnable(3, () => this.bubble.show());
+        // this.bubble.show();
+        this.addChild(this.bubble);
     }
 
     private buildMainGuy(): void {
         this.mainGuy = new MainGuy();
-        this.mainGuy.position.set(this.width / 2, this.height / 2);
+        this.mainGuy.position.set(150, 375);
         this.addChild(this.mainGuy);
     }
 
@@ -75,9 +88,10 @@ export class BoardView extends Container {
 
         switch (newState) {
             case GameState.PreActions:
-                setTimeout(() => {
-                    lego.event.emit(BoardViewEvents.PreActionsComplete);
-                }, 500);
+                this.preActions();
+                // setTimeout(() => {
+                //     lego.event.emit(BoardViewEvents.PreActionsComplete);
+                // }, 500);
                 break;
             case GameState.Wave1Actions:
                 setTimeout(() => {
@@ -100,6 +114,10 @@ export class BoardView extends Container {
             default:
                 break;
         }
+    }
+
+    private preActions(): void {
+        //
     }
 
     private showHouse(): void {

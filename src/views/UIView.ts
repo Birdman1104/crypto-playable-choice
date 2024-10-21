@@ -47,7 +47,7 @@ export class UIView extends PixiGrid {
 
     private buildMoneyBar(): void {
         this.moneyBar = new MoneyBar();
-        this.setChild('money_bar', this.moneyBar);
+        this.setChild('money_bar_hide', this.moneyBar);
     }
 
     private onStateUpdate(newState): void {

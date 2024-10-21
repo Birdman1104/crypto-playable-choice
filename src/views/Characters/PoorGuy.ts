@@ -1,6 +1,5 @@
 import anime from 'animejs';
 import { Container } from 'pixi.js';
-import { delayRunnable } from '../../utils';
 import { PoorBody } from './PoorBody';
 
 export class PoorGuy extends Container {
@@ -28,7 +27,6 @@ export class PoorGuy extends Container {
         this.addChild(this.body);
 
         this.idle();
-        delayRunnable(4, () => this.happy());
     }
 
     private breathe(): void {

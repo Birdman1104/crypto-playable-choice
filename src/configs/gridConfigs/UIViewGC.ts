@@ -25,6 +25,10 @@ const getUIGridLandscapeConfig = () => {
                 name: 'money_bar',
                 bounds: { x: 0, y: 0, width: 1, height: 0.2 },
             },
+            {
+                name: 'money_bar_hide',
+                bounds: { x: 0, y: -0.4, width: 1, height: 0.2 },
+            },
         ],
     };
 };
@@ -48,6 +52,10 @@ const getUIGridPortraitConfig = () => {
             {
                 name: 'money_bar',
                 bounds: { x: 0, y: 0, width: 1, height: 0.2 },
+            },
+            {
+                name: 'money_bar_hide',
+                bounds: { x: 0, y: -0.4, width: 1, height: 0.2 },
             },
         ],
     };

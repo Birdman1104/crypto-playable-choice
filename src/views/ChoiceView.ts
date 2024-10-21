@@ -1,13 +1,13 @@
+import anime from 'animejs';
 import { Container, Sprite } from 'pixi.js';
 import { Images } from '../assets';
 import { makeSprite } from '../utils';
 
 export class ChoiceView extends Container {
-    private bkg: Sprite;
-    private icon: Sprite;
-    private price: Sprite;
-    private text: Sprite;
+    private choice: Sprite;
+    private clickedChoice: Sprite;
     private canEmit = true;
+    private canAnimate = true;
 
     constructor(private config: ChoiceConfig) {
         super();
@@ -17,39 +17,71 @@ export class ChoiceView extends Container {
 
     public disable(): void {
         this.canEmit = false;
-        this.alpha = 0.7;
+        // this.alpha = 0.7;
     }
 
     private build(): void {
-        this.buildBkg();
-        this.buildIcon();
-        // this.buildPrice();
-        // this.buildText();
+        this.buildChoice();
+        this.buildClickedChoice();
     }
 
-    private buildBkg(): void {
-        this.bkg = makeSprite({ texture: Images['game/choice_bkg'] });
-        this.bkg.interactive = true;
-        this.bkg.on('pointerdown', () => {
-            this.canEmit && this.emit('choiceClick', this.config.name);
+    private buildChoice(): void {
+        this.choice = makeSprite({ texture: Images[`game/${this.config.icon}`] });
+        this.choice.interactive = true;
+        this.choice.on('pointerdown', () => {
+            this.canAnimate && this.animateClick();
+            this.canAnimate = false;
         });
-        this.addChild(this.bkg);
+        this.addChild(this.choice);
     }
 
-    private buildIcon(): void {
-        this.icon = makeSprite({ texture: Images[`game/${this.config.icon}`] });
-        this.addChild(this.icon);
+    private buildClickedChoice(): void {
+        this.clickedChoice = makeSprite({ texture: Images[`game/${this.config.icon}_clicked`] });
+        this.clickedChoice.visible = false;
+        this.clickedChoice.alpha = 0;
+        this.clickedChoice.scale.set(0.7);
+
+        this.addChild(this.clickedChoice);
     }
 
-    private buildPrice(): void {
-        this.price = makeSprite({ texture: Images[`game/${this.config.price}`] });
-        this.price.position.set(0, 50);
-        this.addChild(this.price);
+    private animateClick(): void {
+        anime({
+            targets: this.choice.scale,
+            x: 0.7,
+            y: 0.7,
+            easing: 'easeInOutSine',
+            duration: 150,
+            complete: () => this.switchChoices(),
+        });
     }
 
-    private buildText(): void {
-        this.text = makeSprite({ texture: Images[`game/${this.config.name}`] });
-        this.text.position.set(0, -50);
-        this.addChild(this.text);
+    private switchChoices(): void {
+        this.clickedChoice.visible = true;
+        anime({
+            targets: this.clickedChoice,
+            alpha: 1,
+            easing: 'easeInOutSine',
+            duration: 50,
+        });
+        anime({
+            targets: this.choice,
+            alpha: 0,
+            easing: 'easeInOutSine',
+            duration: 50,
+            complete: () => this.bringBackToNormalSize(),
+        });
+    }
+
+    private bringBackToNormalSize(): void {
+        anime({
+            targets: this.clickedChoice.scale,
+            x: 1,
+            y: 1,
+            easing: 'easeInOutSine',
+            duration: 150,
+            complete: () => {
+                this.canEmit && this.emit('choiceClick', this.config.name);
+            },
+        });
     }
 }

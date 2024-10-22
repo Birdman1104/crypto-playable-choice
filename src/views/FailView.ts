@@ -37,8 +37,8 @@ export class FailView extends Container {
     private showTryAgain(): void {
         anime({
             targets: this.tryAgain.scale,
-            x: 1.2,
-            y: 1.2,
+            x: 1.3,
+            y: 1.3,
             duration: 300,
             easing: 'easeInOutSine',
             complete: () => this.pulseTryAgain(),
@@ -49,8 +49,8 @@ export class FailView extends Container {
         this.canEmit = true;
         anime({
             targets: this.tryAgain.scale,
-            x: 1.35,
-            y: 1.35,
+            x: 1.45,
+            y: 1.45,
             duration: 200,
             direction: 'alternate',
             loop: true,
@@ -72,7 +72,7 @@ export class FailView extends Container {
 
     private buildTryAgain(): void {
         this.tryAgain = makeSprite({ texture: Images['game/try_again'] });
-        this.tryAgain.position.set(this.width / 2, this.height - this.tryAgain.height / 2 - 50);
+        this.tryAgain.position.set(this.width / 2, this.height - this.tryAgain.height / 2 - 100);
         this.tryAgain.scale.set(0);
         this.tryAgain.interactive = true;
         this.tryAgain.on('pointerdown', () => {

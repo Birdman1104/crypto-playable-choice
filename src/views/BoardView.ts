@@ -1,6 +1,6 @@
 import { lego } from '@armathai/lego';
 import anime from 'animejs';
-import { Container, Rectangle, Sprite } from 'pixi.js';
+import { AnimatedSprite, Container, Rectangle, Sprite } from 'pixi.js';
 import { Images } from '../assets';
 import { BoardViewEvents } from '../events/MainEvents';
 import { GameModelEvents } from '../events/ModelEvents';
@@ -84,8 +84,6 @@ export class BoardView extends Container {
     }
 
     private onStateUpdate(newState: GameState, oldState: GameState): void {
-        console.warn('new game state is ', newState);
-
         switch (newState) {
             case GameState.PreActions:
                 this.preActions();
@@ -122,6 +120,7 @@ export class BoardView extends Container {
     private wave1Actions(): void {
         this.poorGuy.happy();
         this.mainGuy.happy();
+        this.playDudeUpgradeVFX();
         anime({
             targets: this.poorGuy,
             alpha: 0,
@@ -168,5 +167,25 @@ export class BoardView extends Container {
     private wave3Actions(): void {
         this.mainGuy.happy();
         this.house.show();
+    }
+
+    private playDudeUpgradeVFX(): void {
+        const frames: any[] = [];
+        for (let i = 0; i <= 19; i++) {
+            frames.push(Images[`upgrade_vfx/Fx05_${i < 10 ? '0' + i : i}`]);
+        }
+
+        const anim = AnimatedSprite.fromFrames(frames);
+        anim.position.copyFrom(this.mainGuy.position);
+        anim.anchor.set(0.5);
+        anim.animationSpeed = 0.45;
+        anim.scale.set(1.2);
+        anim.loop = false;
+
+        anim.play();
+        anim.onComplete = () => {
+            anim.destroy();
+        };
+        this.addChild(anim);
     }
 }

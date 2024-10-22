@@ -1,6 +1,6 @@
 import { lego } from '@armathai/lego';
 import anime from 'animejs';
-import { Container, Sprite } from 'pixi.js';
+import { AnimatedSprite, Container, Sprite } from 'pixi.js';
 import { Images } from '../assets';
 import { BoardViewEvents } from '../events/MainEvents';
 import { makeSprite } from '../utils';
@@ -25,6 +25,7 @@ export class House extends Container {
     }
 
     public show(): void {
+        this.playDustVFX();
         [
             this.layer5,
             this.layer4,
@@ -122,5 +123,24 @@ export class House extends Container {
         });
 
         this.house.alpha = 0;
+    }
+
+    private playDustVFX(): void {
+        const frames: any[] = [];
+        for (let i = 0; i <= 16; i++) {
+            frames.push(Images[`dust/Fx03_${i < 10 ? '0' + i : i}`]);
+        }
+
+        const anim = AnimatedSprite.fromFrames(frames);
+        anim.anchor.set(0.5);
+        anim.animationSpeed = 0.5;
+        anim.scale.set(1.5);
+        anim.loop = false;
+
+        anim.play();
+        anim.onComplete = () => {
+            anim.destroy();
+        };
+        this.addChild(anim);
     }
 }

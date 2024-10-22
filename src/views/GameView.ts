@@ -10,6 +10,7 @@ import { BoardView } from './BoardView';
 export class GameView extends PixiGrid {
     private board: BoardView;
     private sky: Graphics;
+    private ground: Graphics;
 
     constructor() {
         super();
@@ -32,6 +33,7 @@ export class GameView extends PixiGrid {
 
     private build(): void {
         this.buildSky();
+        this.buildGround();
         this.buildBoard();
     }
 
@@ -41,6 +43,14 @@ export class GameView extends PixiGrid {
         this.sky.drawRect(0, 0, 10, 10);
         this.sky.endFill();
         this.setChild('sky', this.sky);
+    }
+
+    private buildGround(): void {
+        this.ground = new Graphics();
+        this.ground.beginFill(0x1f1423, 1);
+        this.ground.drawRect(0, 0, 10, 10);
+        this.ground.endFill();
+        this.setChild('ground', this.ground);
     }
 
     private buildBoard(): void {

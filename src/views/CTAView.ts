@@ -37,7 +37,7 @@ export class CTAView extends PixiGrid {
 
     private buildBlocker(): void {
         this.blocker = new Graphics();
-        this.blocker.beginFill(0x121212, 1);
+        this.blocker.beginFill(0x000000, 1);
         this.blocker.drawRect(0, 0, 10, 10);
         this.blocker.endFill();
         this.blocker.alpha = 0;

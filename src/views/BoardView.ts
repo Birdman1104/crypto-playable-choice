@@ -12,9 +12,9 @@ import { MainGuy } from './Characters/MainGuy';
 import { PoorGuy } from './Characters/PoorGuy';
 import { House } from './House';
 
-const CAR_SCALE = 1.1;
+const CAR_SCALE = 1;
 const CAR_INITIAL_X = -1500;
-const CAR_FINAL_X = 0;
+const CAR_FINAL_X = 32;
 const CAR_Y = 360;
 export class BoardView extends Container {
     private bkg: Sprite;
@@ -79,6 +79,7 @@ export class BoardView extends Container {
         this.girl = new Girl();
         this.girl.position.set(320, 290);
         this.girl.scale.set(-0.75, 0.75);
+        this.girl.alpha = 0;
         this.addChild(this.girl);
     }
 
@@ -91,7 +92,7 @@ export class BoardView extends Container {
 
     private buildMainGuy(): void {
         this.mainGuy = new MainGuy();
-        this.mainGuy.position.set(this.poorGuy.x + 5, this.poorGuy.y + 10);
+        this.mainGuy.position.set(this.poorGuy.x - 5, this.poorGuy.y + 10);
         this.mainGuy.alpha = 0;
         this.mainGuy.scale.set(-0.585, 0.585);
         this.addChild(this.mainGuy);
@@ -134,7 +135,7 @@ export class BoardView extends Container {
     private wave1Actions(): void {
         this.poorGuy.happy();
         this.mainGuy.happy();
-        this.playDudeUpgradeVFX();
+        this.playDudeUpgradeVFX(this.mainGuy.x, this.mainGuy.y);
         anime({
             targets: this.poorGuy,
             alpha: 0,
@@ -169,18 +170,19 @@ export class BoardView extends Container {
                 delayRunnable(1, () => lego.event.emit(BoardViewEvents.Wave2ActionsComplete));
             },
         });
-        anime({
-            targets: this.car.scale,
-            x: CAR_SCALE + 0.1,
-            direction: 'alternate',
-            duration: 300,
-            easing: 'easeOutBack',
-        });
     }
 
     private wave3Actions(): void {
         this.mainGuy.happy();
         this.house.show();
+        anime({
+            targets: this.girl,
+            alpha: 1,
+            duration: 200,
+            easing: 'easeInOutSine',
+        });
+        this.playDudeUpgradeVFX(this.girl.x, this.girl.y);
+
         anime({
             targets: this.mainGuy.scale,
             x: 0.585,
@@ -189,14 +191,14 @@ export class BoardView extends Container {
         });
     }
 
-    private playDudeUpgradeVFX(): void {
+    private playDudeUpgradeVFX(x: number, y: number): void {
         const frames: any[] = [];
         for (let i = 0; i <= 19; i++) {
             frames.push(Images[`upgrade_vfx/Fx05_${i < 10 ? '0' + i : i}`]);
         }
 
         const anim = AnimatedSprite.fromFrames(frames);
-        anim.position.copyFrom(this.mainGuy.position);
+        anim.position.set(x, y);
         anim.anchor.set(0.5);
         anim.animationSpeed = 0.45;
         anim.scale.set(1.2);

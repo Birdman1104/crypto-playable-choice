@@ -25,7 +25,7 @@ const getUIGridLandscapeConfig = () => {
             },
             {
                 name: 'money_bar',
-                bounds: { x: 0, y: 0.05, width: 1, height: 0.125 },
+                bounds: { x: 0, y: 0.01, width: 1, height: 0.125 },
             },
             {
                 name: 'money_bar_hide',

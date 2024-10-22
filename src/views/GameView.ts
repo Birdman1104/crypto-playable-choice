@@ -61,8 +61,10 @@ export class GameView extends PixiGrid {
     private onStateUpdate(state: GameState): void {
         switch (state) {
             case GameState.Wave1Actions:
-            case GameState.Wave2Actions:
                 tweenToCell(this, this.board, 'wave1action', 'easeInOutSine', 400);
+                break;
+            case GameState.Wave2Actions:
+                tweenToCell(this, this.board, 'wave2action', 'easeInOutSine', 400);
                 break;
             case GameState.Wave3Actions:
                 tweenToCell(this, this.board, 'wave3action', 'easeInOutSine', 400);

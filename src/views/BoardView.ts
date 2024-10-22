@@ -7,10 +7,15 @@ import { GameModelEvents } from '../events/ModelEvents';
 import { GameState } from '../models/GameModel';
 import { delayRunnable, makeSprite } from '../utils';
 import { Bubble } from './Bubble';
+import { Girl } from './Characters/Girl';
 import { MainGuy } from './Characters/MainGuy';
 import { PoorGuy } from './Characters/PoorGuy';
 import { House } from './House';
 
+const CAR_SCALE = 1.1;
+const CAR_INITIAL_X = -1500;
+const CAR_FINAL_X = 0;
+const CAR_Y = 360;
 export class BoardView extends Container {
     private bkg: Sprite;
     private poorGuy: PoorGuy;
@@ -18,6 +23,7 @@ export class BoardView extends Container {
     private car: Sprite;
     private house: House;
     private bubble: Bubble;
+    private girl: Girl;
 
     constructor() {
         super();
@@ -25,19 +31,21 @@ export class BoardView extends Container {
         lego.event.on(GameModelEvents.StateUpdate, this.onStateUpdate, this);
 
         this.build();
+        // drawBounds(this);
     }
 
-    public getBounds(skipUpdate?: boolean | undefined, rect?: PIXI.Rectangle | undefined): Rectangle {
-        return new Rectangle(0, 0, 700, 500);
+    public getBounds(skipUpdate?: boolean | undefined, rect?: Rectangle | undefined): Rectangle {
+        return new Rectangle(0, 50, 600, 450);
     }
 
     private build(): void {
         this.buildBkg();
         this.buildHouse();
-        this.buildCar();
         this.buildPoorGuy();
         this.buildMainGuy();
+        this.buildCar();
         this.buildBubble();
+        this.buildGirl();
     }
 
     private buildBkg(): void {
@@ -48,22 +56,30 @@ export class BoardView extends Container {
 
     private buildCar(): void {
         this.car = makeSprite({ texture: Images['game/car'] });
-        this.car.position.set(-1500, 420);
+        this.car.position.set(CAR_INITIAL_X, CAR_Y);
         this.car.alpha = 0;
+        this.car.scale.set(CAR_SCALE);
         this.addChild(this.car);
     }
 
     private buildHouse(): void {
         this.house = new House();
-        this.house.position.set(420, 266);
+        this.house.position.set(360, 245);
         this.addChild(this.house);
     }
 
     private buildPoorGuy(): void {
         this.poorGuy = new PoorGuy();
-        this.poorGuy.position.set(150, 400);
-        this.poorGuy.scale.set(0.4);
+        this.poorGuy.position.set(220, 290);
+        this.poorGuy.scale.set(-0.6, 0.6);
         this.addChild(this.poorGuy);
+    }
+
+    private buildGirl(): void {
+        this.girl = new Girl();
+        this.girl.position.set(320, 290);
+        this.girl.scale.set(-0.75, 0.75);
+        this.addChild(this.girl);
     }
 
     private buildBubble(): void {
@@ -77,7 +93,7 @@ export class BoardView extends Container {
         this.mainGuy = new MainGuy();
         this.mainGuy.position.set(this.poorGuy.x + 5, this.poorGuy.y + 10);
         this.mainGuy.alpha = 0;
-        this.mainGuy.scale.set(0.385);
+        this.mainGuy.scale.set(-0.585, 0.585);
         this.addChild(this.mainGuy);
     }
 
@@ -146,7 +162,7 @@ export class BoardView extends Container {
         });
         anime({
             targets: this.car,
-            x: 100,
+            x: CAR_FINAL_X,
             duration: 900,
             easing: 'easeOutElastic(1, 1.2)',
             complete: () => {
@@ -155,7 +171,7 @@ export class BoardView extends Container {
         });
         anime({
             targets: this.car.scale,
-            x: 1.1,
+            x: CAR_SCALE + 0.1,
             direction: 'alternate',
             duration: 300,
             easing: 'easeOutBack',
@@ -165,6 +181,12 @@ export class BoardView extends Container {
     private wave3Actions(): void {
         this.mainGuy.happy();
         this.house.show();
+        anime({
+            targets: this.mainGuy.scale,
+            x: 0.585,
+            easing: 'easeInOutSine',
+            duration: 200,
+        });
     }
 
     private playDudeUpgradeVFX(): void {

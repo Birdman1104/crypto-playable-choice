@@ -26,8 +26,8 @@ export class PhoneView extends Container {
 
     public getHintPosition(): Point[] {
         let correctAnswer = this.rightChoice.isCorrectAnswer ? this.rightChoice : this.leftChoice;
-
-        return [this.toGlobal(correctAnswer.position)];
+        const pos = new Point(correctAnswer.x + correctAnswer.width / 3.5, correctAnswer.y + 25);
+        return [this.toGlobal(pos)];
     }
 
     public updateChoices(choices: { right: ChoiceModel; wrong: ChoiceModel }): void {

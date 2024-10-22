@@ -41,7 +41,7 @@ export class MainHead extends Container {
 
         anime({
             targets: this,
-            angle: [-1, 0.5],
+            angle: [-0.7, 0.3],
             duration: 1000,
             direction: 'alternate',
             easing: 'easeInOutSine',
@@ -58,7 +58,7 @@ export class MainHead extends Container {
 
         anime({
             targets: this,
-            angle: [-1, 0.5],
+            angle: [-0.7, 0.3],
             duration: 1000,
             direction: 'alternate',
             easing: 'easeInOutSine',

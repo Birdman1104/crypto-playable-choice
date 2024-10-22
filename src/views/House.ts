@@ -15,7 +15,6 @@ export class House extends Container {
     private layer7: Sprite;
     private layer8: Sprite;
     private layer9: Sprite;
-    private gf: Sprite;
     private house: Sprite;
 
     constructor() {
@@ -24,9 +23,8 @@ export class House extends Container {
         this.build();
     }
 
-    public show(): void {
-        this.playDustVFX();
-        [
+    get layersInOrder(): Sprite[] {
+        return [
             this.layer5,
             this.layer4,
             this.layer8,
@@ -36,16 +34,20 @@ export class House extends Container {
             this.layer9,
             this.layer1,
             this.layer2,
-            this.gf,
-        ].forEach((layer, i) => {
+        ];
+    }
+
+    public show(): void {
+        this.playDustVFX();
+        this.layersInOrder.forEach((layer, i) => {
             anime({
                 targets: layer.scale,
-                x: i === 9 ? -0.7 : 1,
-                y: i === 9 ? 0.7 : 1,
+                x: 1,
+                y: 1,
                 duration: 300,
                 delay: i * 100,
                 complete: () => {
-                    if (i === 9) {
+                    if (i === this.layersInOrder.length - 1) {
                         anime({
                             targets: this.house,
                             alpha: 1,
@@ -103,22 +105,7 @@ export class House extends Container {
         this.house = makeSprite({ texture: Images['house/house'] });
         this.addChild(this.house);
 
-        this.gf = makeSprite({ texture: Images['house/gf'] });
-        this.gf.position.set(-75, 116);
-        this.addChild(this.gf);
-
-        [
-            this.layer1,
-            this.layer2,
-            this.layer3,
-            this.layer4,
-            this.layer5,
-            this.layer6,
-            this.layer7,
-            this.layer8,
-            this.layer9,
-            this.gf,
-        ].forEach((layer) => {
+        this.layersInOrder.forEach((layer) => {
             layer.scale.set(0);
         });
 

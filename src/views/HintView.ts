@@ -36,7 +36,7 @@ export class HintView extends Container {
 
     private build(): void {
         this.hand = makeSprite({ texture: Images['game/hand'] });
-        this.hand.anchor.set(0.1, 0);
+        this.hand.anchor.set(0.15, 0.25);
         this.addChild(this.hand);
     }
 
@@ -66,16 +66,31 @@ export class HintView extends Container {
 
     private pointHand(): void {
         anime({
-            targets: this.hand.scale,
-            x: 0.8,
-            y: 0.8,
-            duration: 500,
+            targets: this.hand,
+            alpha: 1,
+            duration: 300,
             easing: 'easeInOutCubic',
-            direction: 'alternate',
             complete: () => {
-                this.currentPoint += 1;
-                this.currentPoint = this.hintPositions.length % this.currentPoint;
-                this.moveHand(this.hintPositions[this.currentPoint]);
+                anime({
+                    targets: this.hand.scale,
+                    x: 0.8,
+                    y: 0.8,
+                    duration: 500,
+                    easing: 'easeInOutCubic',
+                    direction: 'alternate',
+                    loop: 6,
+                    complete: () => {
+                        anime({
+                            targets: this.hand,
+                            alpha: 0,
+                            duration: 300,
+                            easing: 'easeInOutCubic',
+                            complete: () => {
+                                this.moveHand(this.hintPositions[this.currentPoint]);
+                            },
+                        });
+                    },
+                });
             },
         });
     }
@@ -85,7 +100,7 @@ export class HintView extends Container {
             targets: this.hand,
             x: pos.x,
             y: pos.y,
-            duration: 500,
+            duration: 3000,
             easing: 'easeInOutCubic',
             complete: () => this.pointHand(),
         });

@@ -7,8 +7,8 @@ export const getUIGridConfig = () => {
 
 const getUIGridLandscapeConfig = () => {
     const bounds = { x: 0, y: 0, width: document.body.clientWidth, height: document.body.clientHeight };
-    const phoneX = 0.4;
-    const phoneW = 1 - phoneX;
+    const phoneX = 0.5;
+    const phoneW = 0.8 - phoneX;
     return {
         name: 'ui',
         // debug: { color: 0xd950ff },
@@ -16,7 +16,7 @@ const getUIGridLandscapeConfig = () => {
         cells: [
             {
                 name: 'phone_show',
-                bounds: { x: phoneX, y: 0.5, width: phoneW, height: 0.8 },
+                bounds: { x: phoneX, y: 0.5, width: phoneW, height: 0.7 },
                 align: CellAlign.centerBottom,
             },
             {

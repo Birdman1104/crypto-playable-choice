@@ -1,6 +1,10 @@
+import { lego } from '@armathai/lego';
 import { ICellConfig, PixiGrid } from '@armathai/pixi-grid';
 import { Graphics } from 'pixi.js';
 import { getGameViewGridConfig } from '../configs/gridConfigs/GameViewGC';
+import { GameModelEvents } from '../events/ModelEvents';
+import { GameState } from '../models/GameModel';
+import { tweenToCell } from '../utils';
 import { BoardView } from './BoardView';
 
 export class GameView extends PixiGrid {
@@ -10,6 +14,7 @@ export class GameView extends PixiGrid {
     constructor() {
         super();
 
+        lego.event.on(GameModelEvents.StateUpdate, this.onStateUpdate, this);
         this.build();
     }
 
@@ -41,5 +46,28 @@ export class GameView extends PixiGrid {
     private buildBoard(): void {
         this.board = new BoardView();
         this.setChild('preaction', this.board);
+    }
+
+    private onStateUpdate(state: GameState): void {
+        switch (state) {
+            case GameState.Wave1Actions:
+            case GameState.Wave2Actions:
+                tweenToCell(this, this.board, 'wave1action', 'easeInOutSine');
+                break;
+            case GameState.Wave3Actions:
+                tweenToCell(this, this.board, 'wave3action', 'easeInOutSine');
+                break;
+            case GameState.Wave4Actions:
+                break;
+            case GameState.Wave1:
+            case GameState.Wave2:
+            case GameState.Wave3:
+            case GameState.Wave4:
+                tweenToCell(this, this.board, 'preaction', 'easeInOutSine');
+                break;
+
+            default:
+                break;
+        }
     }
 }

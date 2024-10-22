@@ -112,9 +112,9 @@ export const tweenToCell = (
     grid,
     child,
     cellName,
+    easing = 'easeOutElastic(1, 1.2)',
     cb: any = null,
     duration = 200,
-    easing = 'easeOutElastic(1, 1.2)',
 ): void => {
     const { x: fromScaleX, y: fromScaleY } = child.scale;
     const { x: fromPositionX, y: fromPositionY } = child.position;

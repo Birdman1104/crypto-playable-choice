@@ -25,8 +25,6 @@ export class BoardView extends Container {
         lego.event.on(GameModelEvents.StateUpdate, this.onStateUpdate, this);
 
         this.build();
-
-        // drawBounds(this);
     }
 
     public getBounds(skipUpdate?: boolean | undefined, rect?: PIXI.Rectangle | undefined): Rectangle {
@@ -35,8 +33,8 @@ export class BoardView extends Container {
 
     private build(): void {
         this.buildBkg();
-        this.buildCar();
         this.buildHouse();
+        this.buildCar();
         this.buildPoorGuy();
         this.buildMainGuy();
         this.buildBubble();

@@ -39,6 +39,7 @@ export class MoneyBar extends Container {
         this.text = new Text('0', {
             fill: 0x11aa88,
             fontSize: 64,
+            fontWeight: 'bold',
         });
         this.text.position.set(30, 0);
         this.text.anchor.set(0.5);

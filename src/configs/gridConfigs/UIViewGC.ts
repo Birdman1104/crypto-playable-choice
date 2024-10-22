@@ -8,7 +8,7 @@ export const getUIGridConfig = () => {
 const getUIGridLandscapeConfig = () => {
     const bounds = { x: 0, y: 0, width: document.body.clientWidth, height: document.body.clientHeight };
     const phoneX = 0.5;
-    const phoneW = 0.8 - phoneX;
+    const phoneW = 0.9 - phoneX;
     return {
         name: 'ui',
         // debug: { color: 0xd950ff },
@@ -16,7 +16,7 @@ const getUIGridLandscapeConfig = () => {
         cells: [
             {
                 name: 'phone_show',
-                bounds: { x: phoneX, y: 0.5, width: phoneW, height: 0.7 },
+                bounds: { x: phoneX, y: 0.4, width: phoneW, height: 0.9 },
                 align: CellAlign.centerBottom,
             },
             {
@@ -37,8 +37,8 @@ const getUIGridLandscapeConfig = () => {
 
 const getUIGridPortraitConfig = () => {
     const bounds = { x: 0, y: 0, width: document.body.clientWidth, height: document.body.clientHeight };
-    const phoneX = 0.4;
-    const phoneW = 0.97 - phoneX;
+    const phoneX = 0.1;
+    const phoneW = 1 - phoneX * 2;
     return {
         name: 'ui',
         // debug: { color: 0xd950ff },
@@ -46,7 +46,7 @@ const getUIGridPortraitConfig = () => {
         cells: [
             {
                 name: 'phone_show',
-                bounds: { x: phoneX, y: 0.5, width: phoneW, height: 0.7 },
+                bounds: { x: phoneX, y: 0.55, width: phoneW, height: 0.7 },
                 align: CellAlign.centerBottom,
             },
             {

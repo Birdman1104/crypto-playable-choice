@@ -78,22 +78,22 @@ const getGameViewGridPortraitConfig = () => {
             {
                 name: 'preaction',
                 scale: CellScale.showAll,
-                bounds: { x: 0, y: 0, width: 1, height: 1 },
+                bounds: { x: -0.1, y: 0, width: 1.2, height: 1 },
             },
             {
                 name: 'wave1action',
                 scale: CellScale.showAll,
-                bounds: { x: 0, y: -0.2, width: 1.4, height: 1.2 },
+                bounds: { x: -0.1, y: 0, width: 1.5, height: 1 },
             },
             {
                 name: 'wave2action',
                 scale: CellScale.showAll,
-                bounds: { x: 0, y: -0.2, width: 1.4, height: 1.2 },
+                bounds: { x: -0.1, y: 0, width: 1.5, height: 1 },
             },
             {
                 name: 'wave3action',
                 scale: CellScale.showAll,
-                bounds: { x: -0.1, y: -0.1, width: 1.2, height: 1.2 },
+                bounds: { x: -0.2, y: 0, width: 1.4, height: 1 },
             },
         ],
     };

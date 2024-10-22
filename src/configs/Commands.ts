@@ -42,10 +42,10 @@ const initializeModelsCommand = (): void => {
         .guard(hintParamGuard)
         .execute(initializeHintModelCommand)
 
-        .execute(startIdleTimerCommand)
+        .execute(startIdleTimerCommand);
 
-        .guard(hintParamGuard)
-        .execute(startHintVisibilityTimerCommand);
+    // .guard(hintParamGuard)
+    // .execute(startHintVisibilityTimerCommand);
 };
 
 export const hideHintCommand = (): void => {

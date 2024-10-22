@@ -30,7 +30,7 @@ export class Bubble extends Container {
                     duration: 300,
                     easing: 'easeInOutSine',
                     complete: () => {
-                        delayRunnable(0.01, () => {
+                        delayRunnable(3, () => {
                             const cb = () => {
                                 lego.event.emit(BoardViewEvents.PreActionsComplete);
                             };
@@ -55,7 +55,7 @@ export class Bubble extends Container {
             targets: this.bubble.scale,
             x: 0,
             y: 0,
-            delay: 100,
+            delay: 200,
             easing: 'easeInOutSine',
             duration: 300,
             complete: () => {

@@ -52,10 +52,10 @@ export class GameView extends PixiGrid {
         switch (state) {
             case GameState.Wave1Actions:
             case GameState.Wave2Actions:
-                tweenToCell(this, this.board, 'wave1action', 'easeInOutSine');
+                tweenToCell(this, this.board, 'wave1action', 'easeInOutSine', 400);
                 break;
             case GameState.Wave3Actions:
-                tweenToCell(this, this.board, 'wave3action', 'easeInOutSine');
+                tweenToCell(this, this.board, 'wave3action', 'easeInOutSine', 400);
                 break;
             case GameState.Wave4Actions:
                 break;
@@ -63,7 +63,7 @@ export class GameView extends PixiGrid {
             case GameState.Wave2:
             case GameState.Wave3:
             case GameState.Wave4:
-                tweenToCell(this, this.board, 'preaction', 'easeInOutSine');
+                tweenToCell(this, this.board, 'preaction', 'easeInOutSine', 400);
                 break;
 
             default:

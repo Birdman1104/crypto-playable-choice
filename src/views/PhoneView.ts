@@ -4,7 +4,7 @@ import { Images } from '../assets';
 import { PhoneViewEvents } from '../events/MainEvents';
 import { ChoiceModelEvents } from '../events/ModelEvents';
 import { ChoiceModel } from '../models/ChoiceModel';
-import { makeSprite } from '../utils';
+import { delayRunnable, makeSprite } from '../utils';
 import { ChoiceView } from './ChoiceView';
 
 export class PhoneView extends Container {
@@ -51,7 +51,9 @@ export class PhoneView extends Container {
             lego.event.emit(PhoneViewEvents.ChoiceClick, name);
         });
         choiceView.on('clickAnimationComplete', (name) => {
-            lego.event.emit(PhoneViewEvents.ClickAnimationComplete, name);
+            delayRunnable(0.5, () => {
+                lego.event.emit(PhoneViewEvents.ClickAnimationComplete, name);
+            });
         });
         this.addChild(choiceView);
 

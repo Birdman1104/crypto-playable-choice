@@ -87,13 +87,13 @@ export class BoardView extends Container {
                 this.preActions();
                 break;
             case GameState.Wave1Actions:
-                this.wave1Actions();
+                delayRunnable(0.3, () => this.wave1Actions());
                 break;
             case GameState.Wave2Actions:
-                this.wave2Actions();
+                delayRunnable(0.3, () => this.wave2Actions());
                 break;
             case GameState.Wave3Actions:
-                this.wave3Actions();
+                delayRunnable(0.3, () => this.wave3Actions());
                 break;
             case GameState.Wave4Actions:
                 //

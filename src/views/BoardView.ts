@@ -12,10 +12,10 @@ import { MainGuy } from './Characters/MainGuy';
 import { PoorGuy } from './Characters/PoorGuy';
 import { House } from './House';
 
-const CAR_SCALE = 1;
+const CAR_SCALE = 1.2;
 const CAR_INITIAL_X = -1500;
 const CAR_FINAL_X = 32;
-const CAR_Y = 360;
+const CAR_Y = 330;
 export class BoardView extends Container {
     private bkg: Sprite;
     private poorGuy: PoorGuy;
@@ -31,7 +31,6 @@ export class BoardView extends Container {
         lego.event.on(GameModelEvents.StateUpdate, this.onStateUpdate, this);
 
         this.build();
-        // drawBounds(this);
     }
 
     public getBounds(skipUpdate?: boolean | undefined, rect?: Rectangle | undefined): Rectangle {
@@ -43,9 +42,9 @@ export class BoardView extends Container {
         this.buildHouse();
         this.buildPoorGuy();
         this.buildMainGuy();
-        this.buildCar();
         this.buildBubble();
         this.buildGirl();
+        this.buildCar();
     }
 
     private buildBkg(): void {
@@ -70,15 +69,15 @@ export class BoardView extends Container {
 
     private buildPoorGuy(): void {
         this.poorGuy = new PoorGuy();
-        this.poorGuy.position.set(220, 290);
-        this.poorGuy.scale.set(-0.6, 0.6);
+        this.poorGuy.position.set(220, 278);
+        this.poorGuy.scale.set(-0.65, 0.65);
         this.addChild(this.poorGuy);
     }
 
     private buildGirl(): void {
         this.girl = new Girl();
         this.girl.position.set(320, 290);
-        this.girl.scale.set(-0.75, 0.75);
+        this.girl.scale.set(-0.8, 0.8);
         this.girl.alpha = 0;
         this.addChild(this.girl);
     }
@@ -92,9 +91,9 @@ export class BoardView extends Container {
 
     private buildMainGuy(): void {
         this.mainGuy = new MainGuy();
-        this.mainGuy.position.set(this.poorGuy.x - 5, this.poorGuy.y + 10);
+        this.mainGuy.position.set(this.poorGuy.x - 5, this.poorGuy.y + 15);
         this.mainGuy.alpha = 0;
-        this.mainGuy.scale.set(-0.585, 0.585);
+        this.mainGuy.scale.set(-0.635, 0.635);
         this.addChild(this.mainGuy);
     }
 

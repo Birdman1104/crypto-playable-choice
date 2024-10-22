@@ -24,24 +24,19 @@ const getGameViewGridLandscapeConfig = () => {
                 bounds: { x: 0, y: 1, width: 1, height: 0.5 },
             },
             {
-                name: 'board',
-                scale: CellScale.showAll,
-                bounds: { x: 0, y: 0, width: 1, height: 1 },
-            },
-            {
                 name: 'preaction',
                 scale: CellScale.showAll,
-                bounds: { x: -0.1, y: -0.1, width: 1.2, height: 1.2 },
+                bounds: { x: -0.1, y: -0.05, width: 1.2, height: 1.2 },
             },
             {
                 name: 'wave1action',
                 scale: CellScale.showAll,
-                bounds: { x: -0.1, y: -0.1, width: 1.25, height: 1.2 },
+                bounds: { x: -0.1, y: -0.05, width: 1.25, height: 1.2 },
             },
             {
                 name: 'wave2action',
                 scale: CellScale.showAll,
-                bounds: { x: -0.1, y: -0.1, width: 1.25, height: 1.2 },
+                bounds: { x: -0.1, y: -0.05, width: 1.25, height: 1.2 },
             },
             {
                 name: 'wave3action',
@@ -69,11 +64,6 @@ const getGameViewGridPortraitConfig = () => {
                 name: 'ground',
                 scale: CellScale.fill,
                 bounds: { x: 0, y: 0.5, width: 1, height: 0.5 },
-            },
-            {
-                name: 'board',
-                scale: CellScale.showAll,
-                bounds: { x: 0, y: 0, width: 1, height: 1 },
             },
             {
                 name: 'preaction',

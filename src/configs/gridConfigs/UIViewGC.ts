@@ -25,7 +25,7 @@ const getUIGridLandscapeConfig = () => {
             },
             {
                 name: 'money_bar',
-                bounds: { x: 0, y: 0, width: 1, height: 0.2 },
+                bounds: { x: 0, y: 0.05, width: 1, height: 0.125 },
             },
             {
                 name: 'money_bar_hide',
@@ -37,8 +37,8 @@ const getUIGridLandscapeConfig = () => {
 
 const getUIGridPortraitConfig = () => {
     const bounds = { x: 0, y: 0, width: document.body.clientWidth, height: document.body.clientHeight };
-    const phoneX = 0.3;
-    const phoneW = 1 - phoneX;
+    const phoneX = 0.4;
+    const phoneW = 0.97 - phoneX;
     return {
         name: 'ui',
         // debug: { color: 0xd950ff },
@@ -55,11 +55,11 @@ const getUIGridPortraitConfig = () => {
             },
             {
                 name: 'money_bar',
-                bounds: { x: 0, y: 0, width: 1, height: 0.2 },
+                bounds: { x: 0.2, y: 0, width: 0.6, height: 0.2 },
             },
             {
                 name: 'money_bar_hide',
-                bounds: { x: 0, y: -0.4, width: 1, height: 0.2 },
+                bounds: { x: 0.2, y: -0.4, width: 0.6, height: 0.2 },
             },
         ],
     };

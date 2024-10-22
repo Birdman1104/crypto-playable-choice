@@ -15,6 +15,10 @@ export class ChoiceView extends Container {
         this.build();
     }
 
+    get isCorrectAnswer(): boolean {
+        return this.config.isCorrectAnswer;
+    }
+
     public disable(): void {
         this.canEmit = false;
     }

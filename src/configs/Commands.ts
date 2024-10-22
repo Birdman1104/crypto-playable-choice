@@ -26,8 +26,8 @@ const startIdleTimerCommand = (): void => Head.ad?.startIdleTimer();
 const stopIdleTimerCommand = (): void => Head.ad?.stopIdleTimer();
 
 const setHintStateCommand = (state: HintState): void => Head.ad?.hint?.setState(state);
-const startHintVisibilityTimerCommand = (): void => Head.ad?.hint?.startVisibilityTimer();
-const stopHintVisibilityTimerCommand = (): void => Head.ad?.hint?.stopVisibilityTimer();
+export const startHintVisibilityTimerCommand = (): void => Head.ad?.hint?.startVisibilityTimer();
+export const stopHintVisibilityTimerCommand = (): void => Head.ad?.hint?.stopVisibilityTimer();
 
 const initializeModelsCommand = (): void => {
     lego.command
@@ -48,7 +48,7 @@ const initializeModelsCommand = (): void => {
         .execute(startHintVisibilityTimerCommand);
 };
 
-const hideHintCommand = (): void => {
+export const hideHintCommand = (): void => {
     lego.command.payload(false).execute(setHintVisibleCommand);
 };
 
@@ -114,6 +114,10 @@ export const onGameOverUpdateCommand = (): void => {
 };
 
 export const resizeCommand = (): void => {
+    lego.command.execute(restartHintCommand);
+};
+
+export const restartHintCommand = (): void => {
     lego.command
         //
         .guard(hintModelGuard)

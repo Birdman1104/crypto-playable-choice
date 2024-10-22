@@ -1,5 +1,5 @@
 import { lego } from '@armathai/lego';
-import { Container, Sprite } from 'pixi.js';
+import { Container, Point, Sprite } from 'pixi.js';
 import { Images } from '../assets';
 import { PhoneViewEvents } from '../events/MainEvents';
 import { ChoiceModelEvents } from '../events/ModelEvents';
@@ -18,6 +18,16 @@ export class PhoneView extends Container {
         lego.event.on(ChoiceModelEvents.IsClickedUpdate, this.onChoiceClick, this);
 
         this.build();
+    }
+
+    get name(): string {
+        return 'PhoneView';
+    }
+
+    public getHintPosition(): Point[] {
+        let correctAnswer = this.rightChoice.isCorrectAnswer ? this.rightChoice : this.leftChoice;
+
+        return [this.toGlobal(correctAnswer.position)];
     }
 
     public updateChoices(choices: { right: ChoiceModel; wrong: ChoiceModel }): void {

@@ -1,9 +1,16 @@
 import { lego } from '@armathai/lego';
 import { GameState } from '../models/GameModel';
 import Head from '../models/HeadModel';
-import { setGameStateCommand, showCtaCommand, takeToStoreCommand } from './Commands';
+import {
+    hideHintCommand,
+    restartHintCommand,
+    setGameStateCommand,
+    showCtaCommand,
+    stopHintVisibilityTimerCommand,
+    takeToStoreCommand,
+} from './Commands';
 import { isRightChoiceGuard, isWrongChoiceGuard } from './GameLogicGuards';
-import { reachedFinalWaveGuard } from './Guards';
+import { hintModelGuard, reachedFinalWaveGuard } from './Guards';
 
 export const onChoiceClickCommand = (name: string): void => {
     lego.command
@@ -12,7 +19,11 @@ export const onChoiceClickCommand = (name: string): void => {
 
         .guard(lego.not(reachedFinalWaveGuard))
         .payload(name)
-        .execute(setChoiceToClickedCommand);
+        .execute(setChoiceToClickedCommand)
+
+        .guard(hintModelGuard)
+        .execute(hideHintCommand)
+        .execute(stopHintVisibilityTimerCommand);
 };
 
 export const onChoiceClickAnimationCommand = (name: string): void => {
@@ -102,7 +113,7 @@ export const onGameStateUpdateCommand = (state: GameState): void => {
         case GameState.Wave2:
         case GameState.Wave3:
         case GameState.Wave4:
-            lego.command.execute(startNextWaveCommand);
+            lego.command.execute(startNextWaveCommand).execute(restartHintCommand);
             break;
         case GameState.Fail:
             lego.command.execute(showCtaCommand);

@@ -3,7 +3,7 @@ import anime from 'animejs';
 import { Container, Point, Sprite } from 'pixi.js';
 import { Images } from '../assets';
 import { HintModelEvents } from '../events/ModelEvents';
-import { makeSprite } from '../utils';
+import { getViewByProperty, makeSprite } from '../utils';
 
 export class HintView extends Container {
     private hand: Sprite;
@@ -13,8 +13,7 @@ export class HintView extends Container {
     constructor() {
         super();
 
-        lego.event
-            .on(HintModelEvents.VisibleUpdate, this.onHintVisibleUpdate, this)
+        lego.event.on(HintModelEvents.VisibleUpdate, this.onHintVisibleUpdate, this);
 
         this.build();
         this.hide();
@@ -30,7 +29,6 @@ export class HintView extends Container {
 
         super.destroy();
     }
-
 
     private onHintVisibleUpdate(visible: boolean): void {
         visible ? this.show() : this.hide();
@@ -99,6 +97,9 @@ export class HintView extends Container {
     }
 
     private getHintPosition(): Point[] {
-        return [new Point(0, 0)];
+        const phoneView = getViewByProperty('name', 'PhoneView');
+        if (!phoneView) return [new Point(0, 0)];
+
+        return phoneView.getHintPosition();
     }
 }

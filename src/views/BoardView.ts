@@ -193,7 +193,7 @@ export class BoardView extends Container {
 
     private playDudeUpgradeVFX(x: number, y: number): void {
         const frames: any[] = [];
-        for (let i = 0; i <= 19; i++) {
+        for (let i = 0; i <= 15; i++) {
             frames.push(Images[`upgrade_vfx/Fx05_${i < 10 ? '0' + i : i}`]);
         }
 

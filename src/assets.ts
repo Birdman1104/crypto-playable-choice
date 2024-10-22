@@ -46,7 +46,6 @@ export const assets = {
         'game/try_again.png': require('../assets/images/game/try_again.png').default,
         'game/yacht.png': require('../assets/images/game/yacht.png').default,
         'game/yacht_clicked.png': require('../assets/images/game/yacht_clicked.png').default,
-        'house/gf.png': require('../assets/images/house/gf.png').default,
         'house/house.png': require('../assets/images/house/house.png').default,
         'house/layer1.png': require('../assets/images/house/layer1.png').default,
         'house/layer2.png': require('../assets/images/house/layer2.png').default,
@@ -101,10 +100,6 @@ export const assets = {
         'upgrade_vfx/Fx05_13.png': require('../assets/images/upgrade_vfx/Fx05_13.png').default,
         'upgrade_vfx/Fx05_14.png': require('../assets/images/upgrade_vfx/Fx05_14.png').default,
         'upgrade_vfx/Fx05_15.png': require('../assets/images/upgrade_vfx/Fx05_15.png').default,
-        'upgrade_vfx/Fx05_16.png': require('../assets/images/upgrade_vfx/Fx05_16.png').default,
-        'upgrade_vfx/Fx05_17.png': require('../assets/images/upgrade_vfx/Fx05_17.png').default,
-        'upgrade_vfx/Fx05_18.png': require('../assets/images/upgrade_vfx/Fx05_18.png').default,
-        'upgrade_vfx/Fx05_19.png': require('../assets/images/upgrade_vfx/Fx05_19.png').default,
     },
     particles: {},
     sounds: {},
@@ -157,7 +152,6 @@ export const Images = {
     'game/try_again': 'game/try_again.png',
     'game/yacht': 'game/yacht.png',
     'game/yacht_clicked': 'game/yacht_clicked.png',
-    'house/gf': 'house/gf.png',
     'house/house': 'house/house.png',
     'house/layer1': 'house/layer1.png',
     'house/layer2': 'house/layer2.png',
@@ -212,10 +206,6 @@ export const Images = {
     'upgrade_vfx/Fx05_13': 'upgrade_vfx/Fx05_13.png',
     'upgrade_vfx/Fx05_14': 'upgrade_vfx/Fx05_14.png',
     'upgrade_vfx/Fx05_15': 'upgrade_vfx/Fx05_15.png',
-    'upgrade_vfx/Fx05_16': 'upgrade_vfx/Fx05_16.png',
-    'upgrade_vfx/Fx05_17': 'upgrade_vfx/Fx05_17.png',
-    'upgrade_vfx/Fx05_18': 'upgrade_vfx/Fx05_18.png',
-    'upgrade_vfx/Fx05_19': 'upgrade_vfx/Fx05_19.png',
 };
 
 export const Sounds = {};

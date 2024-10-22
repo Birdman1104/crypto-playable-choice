@@ -15,7 +15,7 @@ import { House } from './House';
 const CAR_SCALE = 1.2;
 const CAR_INITIAL_X = -1500;
 const CAR_FINAL_X = 32;
-const CAR_Y = 330;
+const CAR_Y = 335;
 export class BoardView extends Container {
     private bkg: Sprite;
     private poorGuy: PoorGuy;
@@ -76,15 +76,15 @@ export class BoardView extends Container {
 
     private buildGirl(): void {
         this.girl = new Girl();
-        this.girl.position.set(320, 290);
-        this.girl.scale.set(-0.8, 0.8);
+        this.girl.position.set(320, 285);
+        this.girl.scale.set(-0.78, 0.78);
         this.girl.alpha = 0;
         this.addChild(this.girl);
     }
 
     private buildBubble(): void {
         this.bubble = new Bubble();
-        this.bubble.position.set(this.poorGuy.x - 30, this.poorGuy.y - 30);
+        this.bubble.position.set(this.poorGuy.x - 30, this.poorGuy.y - 40);
         this.bubble.scale.set(0.8);
         this.addChild(this.bubble);
     }
@@ -184,7 +184,7 @@ export class BoardView extends Container {
 
         anime({
             targets: this.mainGuy.scale,
-            x: 0.585,
+            x: 0.635,
             easing: 'easeInOutSine',
             duration: 200,
         });

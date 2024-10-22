@@ -16,26 +16,26 @@ export class MainGuy extends Container {
         if (this.isIdle) return;
         this.isIdle = true;
         this.body.idle();
+        this.breathe();
     }
 
     public happy(): void {
         if (!this.isIdle) return;
         this.isIdle = false;
         this.body.happy();
+        this.breathe();
     }
 
     private build(): void {
         this.body = new MainBody();
         this.addChild(this.body);
-
-        this.idle();
-        this.breathe();
     }
 
     private breathe(): void {
+        this.body.scale.y = 1;
         anime({
             targets: this.body.scale,
-            y: 1.015,
+            y: 1.01,
             duration: 2000,
             direction: 'alternate',
             easing: 'easeInOutSine',
@@ -44,11 +44,5 @@ export class MainGuy extends Container {
                 this.body.position.y = -((this.body.scale.y - 1) / 2) * this.body.height;
             },
         });
-    }
-
-    private removeAnimations(): void {
-        anime.remove(this.body.scale);
-        this.body.scale.set(1);
-        this.body.position.y = 0;
     }
 }

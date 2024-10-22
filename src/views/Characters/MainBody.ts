@@ -76,6 +76,7 @@ export class MainBody extends Container {
 
     private build(): void {
         this.head = new MainHead();
+        this.head.x = 2;
         this.addChild(this.head);
 
         this.torso = makeSprite({ texture: Images['main_guy/torso'] });

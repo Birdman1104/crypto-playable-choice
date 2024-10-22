@@ -7,6 +7,8 @@ export const getUIGridConfig = () => {
 
 const getUIGridLandscapeConfig = () => {
     const bounds = { x: 0, y: 0, width: document.body.clientWidth, height: document.body.clientHeight };
+    const phoneX = 0.4;
+    const phoneW = 1 - phoneX;
     return {
         name: 'ui',
         // debug: { color: 0xd950ff },
@@ -14,12 +16,12 @@ const getUIGridLandscapeConfig = () => {
         cells: [
             {
                 name: 'phone_show',
-                bounds: { x: 0, y: 0.3, width: 1, height: 0.7 },
+                bounds: { x: phoneX, y: 0.5, width: phoneW, height: 0.8 },
                 align: CellAlign.centerBottom,
             },
             {
                 name: 'phone_hide',
-                bounds: { x: 0, y: 1, width: 1, height: 1 },
+                bounds: { x: phoneX, y: 1, width: phoneW, height: 0.7 },
             },
             {
                 name: 'money_bar',
@@ -35,6 +37,8 @@ const getUIGridLandscapeConfig = () => {
 
 const getUIGridPortraitConfig = () => {
     const bounds = { x: 0, y: 0, width: document.body.clientWidth, height: document.body.clientHeight };
+    const phoneX = 0.3;
+    const phoneW = 1 - phoneX;
     return {
         name: 'ui',
         // debug: { color: 0xd950ff },
@@ -42,12 +46,12 @@ const getUIGridPortraitConfig = () => {
         cells: [
             {
                 name: 'phone_show',
-                bounds: { x: 0, y: 0.3, width: 1, height: 0.7 },
+                bounds: { x: phoneX, y: 0.5, width: phoneW, height: 0.7 },
                 align: CellAlign.centerBottom,
             },
             {
                 name: 'phone_hide',
-                bounds: { x: 0, y: 1, width: 1, height: 1 },
+                bounds: { x: phoneX, y: 1, width: phoneW, height: 1 },
             },
             {
                 name: 'money_bar',

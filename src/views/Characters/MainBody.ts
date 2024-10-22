@@ -24,7 +24,7 @@ export class MainBody extends Container {
 
         anime({
             targets: this.rightArm,
-            angle: [0, -15],
+            angle: [0, -12],
             duration: 800,
             direction: 'alternate',
             easing: 'easeInOutSine',

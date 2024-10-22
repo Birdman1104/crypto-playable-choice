@@ -1,10 +1,11 @@
 import anime from 'animejs';
 import { Container } from 'pixi.js';
-import { delayRunnable } from '../../utils';
 import { MainBody } from './MainBody';
 
 export class MainGuy extends Container {
     private body: MainBody;
+    private isIdle = false;
+
     constructor() {
         super();
 
@@ -12,15 +13,15 @@ export class MainGuy extends Container {
     }
 
     public idle(): void {
-        this.removeAnimations();
+        if (this.isIdle) return;
+        this.isIdle = true;
         this.body.idle();
-        this.breathe();
     }
 
     public happy(): void {
-        this.removeAnimations();
+        if (!this.isIdle) return;
+        this.isIdle = false;
         this.body.happy();
-        this.breathe();
     }
 
     private build(): void {
@@ -28,7 +29,7 @@ export class MainGuy extends Container {
         this.addChild(this.body);
 
         this.idle();
-        delayRunnable(4, () => this.happy());
+        this.breathe();
     }
 
     private breathe(): void {

@@ -56,7 +56,8 @@ export class UIView extends PixiGrid {
             case GameState.Wave2:
             case GameState.Wave3:
             case GameState.Wave4:
-                this.phone && tweenToCell(this, this.phone, 'phone_show', 0.5);
+                this.phone && tweenToCell(this, this.phone, 'phone_show');
+                this.moneyBar && tweenToCell(this, this.moneyBar, 'money_bar');
                 break;
             case GameState.PreActions:
             case GameState.Wave1Actions:

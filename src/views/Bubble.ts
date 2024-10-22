@@ -30,7 +30,7 @@ export class Bubble extends Container {
                     duration: 300,
                     easing: 'easeInOutSine',
                     complete: () => {
-                        delayRunnable(3, () => {
+                        delayRunnable(0.01, () => {
                             const cb = () => {
                                 lego.event.emit(BoardViewEvents.PreActionsComplete);
                             };
@@ -49,17 +49,17 @@ export class Bubble extends Container {
             y: 0,
             duration: 300,
             easing: 'easeInOutSine',
+        });
+
+        anime({
+            targets: this.bubble.scale,
+            x: 0,
+            y: 0,
+            delay: 100,
+            easing: 'easeInOutSine',
+            duration: 300,
             complete: () => {
-                anime({
-                    targets: this.bubble.scale,
-                    x: 0,
-                    y: 0,
-                    easing: 'easeInOutSine',
-                    duration: 300,
-                    complete: () => {
-                        callIfExists(cb);
-                    },
-                });
+                callIfExists(cb);
             },
         });
     }

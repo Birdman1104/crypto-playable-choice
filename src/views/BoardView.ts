@@ -37,8 +37,8 @@ export class BoardView extends Container {
         this.buildBkg();
         this.buildCar();
         this.buildHouse();
-        // this.buildMainGuy();
         this.buildPoorGuy();
+        this.buildMainGuy();
         this.buildBubble();
     }
 
@@ -63,7 +63,7 @@ export class BoardView extends Container {
 
     private buildPoorGuy(): void {
         this.poorGuy = new PoorGuy();
-        this.poorGuy.position.set(150, 375);
+        this.poorGuy.position.set(150, 405);
         this.poorGuy.scale.set(0.4);
         this.addChild(this.poorGuy);
     }
@@ -72,14 +72,14 @@ export class BoardView extends Container {
         this.bubble = new Bubble();
         this.bubble.position.set(this.poorGuy.x + 25, this.poorGuy.y - 90);
         this.bubble.scale.set(0.8);
-        delayRunnable(3, () => this.bubble.show());
-        // this.bubble.show();
         this.addChild(this.bubble);
     }
 
     private buildMainGuy(): void {
         this.mainGuy = new MainGuy();
-        this.mainGuy.position.set(150, 375);
+        this.mainGuy.position.set(this.poorGuy.x + 5, this.poorGuy.y + 10);
+        this.mainGuy.alpha = 0;
+        this.mainGuy.scale.set(0.385);
         this.addChild(this.mainGuy);
     }
 
@@ -89,26 +89,25 @@ export class BoardView extends Container {
         switch (newState) {
             case GameState.PreActions:
                 this.preActions();
-                // setTimeout(() => {
-                //     lego.event.emit(BoardViewEvents.PreActionsComplete);
-                // }, 500);
                 break;
             case GameState.Wave1Actions:
-                setTimeout(() => {
-                    lego.event.emit(BoardViewEvents.Wave1ActionsComplete);
-                }, 500);
+                this.wave1Actions();
                 break;
             case GameState.Wave2Actions:
-                this.showCar();
-
+                this.wave2Actions();
                 break;
             case GameState.Wave3Actions:
-                this.showHouse();
+                this.wave3Actions();
                 break;
             case GameState.Wave4Actions:
-                setTimeout(() => {
-                    lego.event.emit(BoardViewEvents.Wave4ActionsComplete);
-                }, 500);
+                //
+                break;
+            case GameState.Wave1:
+            case GameState.Wave2:
+            case GameState.Wave3:
+            case GameState.Fail:
+                this.poorGuy?.idle();
+                this.mainGuy?.idle();
                 break;
 
             default:
@@ -117,14 +116,31 @@ export class BoardView extends Container {
     }
 
     private preActions(): void {
-        //
+        this.bubble.show();
     }
 
-    private showHouse(): void {
-        this.house.show();
+    private wave1Actions(): void {
+        this.poorGuy.happy();
+        this.mainGuy.happy();
+        anime({
+            targets: this.poorGuy,
+            alpha: 0,
+            duration: 300,
+            easing: 'easeInOutSine',
+        });
+        anime({
+            targets: this.mainGuy,
+            alpha: 1,
+            duration: 300,
+            easing: 'easeInOutSine',
+            complete: () => {
+                delayRunnable(1, () => lego.event.emit(BoardViewEvents.Wave1ActionsComplete));
+            },
+        });
     }
 
-    private showCar(): void {
+    private wave2Actions(): void {
+        this.mainGuy.happy();
         anime({
             targets: this.car,
             alpha: 1,
@@ -137,7 +153,7 @@ export class BoardView extends Container {
             duration: 900,
             easing: 'easeOutElastic(1, 1.2)',
             complete: () => {
-                delayRunnable(500, () => lego.event.emit(BoardViewEvents.Wave2ActionsComplete));
+                delayRunnable(1, () => lego.event.emit(BoardViewEvents.Wave2ActionsComplete));
             },
         });
         anime({
@@ -147,5 +163,10 @@ export class BoardView extends Container {
             duration: 300,
             easing: 'easeOutBack',
         });
+    }
+
+    private wave3Actions(): void {
+        this.mainGuy.happy();
+        this.house.show();
     }
 }

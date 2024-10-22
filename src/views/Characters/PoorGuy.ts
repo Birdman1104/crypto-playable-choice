@@ -4,6 +4,7 @@ import { PoorBody } from './PoorBody';
 
 export class PoorGuy extends Container {
     private body: PoorBody;
+    private isIdle = false;
 
     constructor() {
         super();
@@ -11,15 +12,15 @@ export class PoorGuy extends Container {
     }
 
     public idle(): void {
-        this.removeAnimations();
+        if (this.isIdle) return;
+        this.isIdle = true;
         this.body.idle();
-        this.breathe();
     }
 
     public happy(): void {
-        this.removeAnimations();
+        if (!this.isIdle) return;
+        this.isIdle = false;
         this.body.happy();
-        this.breathe();
     }
 
     private build(): void {
@@ -27,6 +28,7 @@ export class PoorGuy extends Container {
         this.addChild(this.body);
 
         this.idle();
+        this.breathe();
     }
 
     private breathe(): void {

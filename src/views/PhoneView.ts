@@ -44,8 +44,8 @@ export class PhoneView extends Container {
     private buildChoice(choice: ChoiceModel, isOnLeft: boolean): void {
         const config: ChoiceConfig = extractChoiceConfigFromModel(choice);
         const choiceView = new ChoiceView(config, choice.uuid);
-        choiceView.scale.set(0.7);
-        const x = isOnLeft ? -80 : 80;
+        choiceView.scale.set(0.75);
+        const x = isOnLeft ? -82 : 82;
         choiceView.position.set(x, -150);
         choiceView.on('choiceClick', (name) => {
             lego.event.emit(PhoneViewEvents.ChoiceClick, name);

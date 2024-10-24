@@ -1,5 +1,5 @@
-import { CellAlign } from '@armathai/pixi-grid';
-import { lp } from '../../utils';
+import { CellAlign, CellScale } from '@armathai/pixi-grid';
+import { isSquareLikeScreen, lp } from '../../utils';
 
 export const getUIGridConfig = () => {
     return lp(getUIGridLandscapeConfig, getUIGridPortraitConfig).call(null);
@@ -9,6 +9,7 @@ const getUIGridLandscapeConfig = () => {
     const bounds = { x: 0, y: 0, width: document.body.clientWidth, height: document.body.clientHeight };
     const phoneX = 0.5;
     const phoneW = 0.9 - phoneX;
+    const phoneH = isSquareLikeScreen() ? 0.9 : 1.1;
     return {
         name: 'ui',
         // debug: { color: 0xd950ff },
@@ -16,7 +17,8 @@ const getUIGridLandscapeConfig = () => {
         cells: [
             {
                 name: 'phone_show',
-                bounds: { x: phoneX, y: 0.4, width: phoneW, height: 0.9 },
+                bounds: { x: phoneX, y: 0.4, width: phoneW, height: phoneH },
+                scale: CellScale.showAll,
                 align: CellAlign.centerBottom,
             },
             {

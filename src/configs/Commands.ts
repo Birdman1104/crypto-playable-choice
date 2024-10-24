@@ -4,7 +4,14 @@ import { GameState } from '../models/GameModel';
 import Head from '../models/HeadModel';
 import { HintState } from '../models/HintModel';
 import { unMapCommands } from './EventCommandPairs';
-import { ctaModelGuard, gameModelGuard, hintModelGuard, hintParamGuard, soundParamGuard } from './Guards';
+import {
+    ctaModelGuard,
+    gameModelGuard,
+    gameWaveStateGuard,
+    hintModelGuard,
+    hintParamGuard,
+    soundParamGuard,
+} from './Guards';
 
 export const initAdModelCommand = (): void => Head.initializeADModel();
 
@@ -120,17 +127,20 @@ export const resizeCommand = (): void => {
 export const restartHintCommand = (): void => {
     lego.command
         //
-        .guard(hintModelGuard)
+        .guard(hintModelGuard, gameWaveStateGuard)
         .execute(hideHintCommand)
 
-        .guard(hintModelGuard)
+        .guard(hintModelGuard, gameWaveStateGuard)
         .execute(stopHintVisibilityTimerCommand)
 
-        .guard(hintModelGuard)
+        .guard(hintModelGuard, gameWaveStateGuard)
         .execute(startHintVisibilityTimerCommand);
 };
 
 export const takeToStoreCommand = (): void => {
-    // TODO после окончания игры все клики идут сюда
-    window.installCTA();
+    if (!window.installCTA) {
+        window.CTACallImitation && window.CTACallImitation();
+    } else {
+        window.installCTA();
+    }
 };

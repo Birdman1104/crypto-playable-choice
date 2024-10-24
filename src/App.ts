@@ -54,6 +54,11 @@ class App extends Application {
 
     public onFocusChange(focus: boolean): void {
         lego.event.emit(WindowEvent.FocusChange, focus);
+        this.muteSound(!focus);
+    }
+
+    public onVisibilityChange(): void {
+        this.muteSound(document.visibilityState !== 'visible');
     }
 
     public muteSound(value: boolean): void {
@@ -71,7 +76,7 @@ class App extends Application {
     }
 
     private onLoadComplete(): void {
-        window.gameReadyCall();
+        window.gameReadyCall && window.gameReadyCall();
         this.appResize();
         this.stage.start();
         lego.command.execute(mapCommands);

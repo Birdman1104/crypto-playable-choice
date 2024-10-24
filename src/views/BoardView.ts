@@ -63,7 +63,8 @@ export class BoardView extends Container {
 
     private buildHouse(): void {
         this.house = new House();
-        this.house.position.set(360, 245);
+        this.house.scale.set(1.05);
+        this.house.position.set(385, 235);
         this.addChild(this.house);
     }
 

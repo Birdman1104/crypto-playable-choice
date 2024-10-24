@@ -154,6 +154,7 @@ export class BoardView extends Container {
 
     private wave2Actions(): void {
         this.mainGuy.happy();
+        lego.event.emit(BoardViewEvents.CarAnimationStart);
         anime({
             targets: this.car,
             alpha: 1,
@@ -179,9 +180,10 @@ export class BoardView extends Container {
             alpha: 1,
             duration: 200,
             easing: 'easeInOutSine',
+            complete: () => lego.event.emit(BoardViewEvents.GirlAnimationComplete),
         });
         this.playDudeUpgradeVFX(this.girl.x, this.girl.y);
-
+        lego.event.emit(BoardViewEvents.HouseAnimationStart);
         anime({
             targets: this.mainGuy.scale,
             x: 0.635,

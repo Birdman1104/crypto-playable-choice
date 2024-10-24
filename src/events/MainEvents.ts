@@ -28,6 +28,7 @@ export const BoardViewEvents = Object.freeze({
     Wave3ActionsComplete: 'BoardViewEventsWave3ActionsComplete',
     Wave4ActionsComplete: 'BoardViewEventsWave4ActionsComplete',
     CarAnimationStart: 'BoardViewEventsCarAnimationStart',
+    CarAnimationComplete: 'BoardViewEventsCarAnimationComplete',
     HouseAnimationStart: 'BoardViewEventsHouseAnimationStart',
     GirlAnimationComplete: 'BoardViewEventsGirlAnimationComplete',
 });

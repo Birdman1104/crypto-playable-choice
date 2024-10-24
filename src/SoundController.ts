@@ -23,22 +23,22 @@ class SoundControl {
             .on('muteSound', this.mute, this)
             .on(GameModelEvents.StateUpdate, this.onGameStateUpdate, this)
             .on(BoardViewEvents.CarAnimationStart, this.playCar, this)
+            .on(BoardViewEvents.CarAnimationComplete, this.playGuyReaction, this)
             .on(BoardViewEvents.HouseAnimationStart, this.playHome, this)
             .on(BoardViewEvents.GirlAnimationComplete, this.playGirlSound, this)
-            .on(BoardViewEvents.Wave2ActionsComplete, this.playGuyReaction, this)
             .on(PhoneViewEvents.ChoiceClick, this.playClick, this);
     }
 
     public loadSounds(): void {
         this.sounds.click = new Howl({ src: CLICK_SOUND, volume: 1 });
-        this.sounds.car = new Howl({ src: CAR_SOUND, volume: 1 });
+        this.sounds.car = new Howl({ src: CAR_SOUND, volume: 0.7 });
         this.sounds.fail = new Howl({ src: FAIL_SOUND, volume: 1 });
         this.sounds.girlHello = new Howl({ src: GIRL_SOUND, volume: 1 });
         this.sounds.guyReaction = new Howl({ src: GUY_REACTION, volume: 1 });
         this.sounds.home = new Howl({ src: HOME_SOUND, volume: 1 });
         this.sounds.phone = new Howl({ src: PHONE_SOUND, volume: 1 });
         this.sounds.right = new Howl({ src: RIGHT_SOUND, volume: 1 });
-        this.sounds.theme = new Howl({ src: THEME_SOUND, volume: 0.7, loop: true });
+        this.sounds.theme = new Howl({ src: THEME_SOUND, volume: 0.4, loop: true });
         this.sounds.yes = new Howl({ src: YES_SOUND, volume: 1 });
     }
 

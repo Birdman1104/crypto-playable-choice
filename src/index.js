@@ -22,8 +22,8 @@ function isAppleDevice() {
 
 window.CTACallImitation = () => {
     if (isAppleDevice()) {
-        window.open('https://apps.apple.com/ru/app/global-city-build-a-megapolis/id1455860184?l=en-GB');
+        window.open('');
     } else {
-        window.open('https://play.google.com/store/apps/details?id=com.rbx.city.android&hl=en');
+        window.open('https://play.google.com/store/apps/details?id=com.mysterytag.cryptominer&hl=us');
     }
 };

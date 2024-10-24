@@ -140,6 +140,9 @@ export class BoardView extends Container {
             alpha: 0,
             duration: 300,
             easing: 'easeInOutSine',
+            complete: () => {
+                this.poorGuy.destroy();
+            },
         });
         anime({
             targets: this.mainGuy,
@@ -167,6 +170,7 @@ export class BoardView extends Container {
             duration: 900,
             easing: 'easeOutElastic(1, 1.2)',
             complete: () => {
+                lego.event.emit(BoardViewEvents.CarAnimationComplete);
                 delayRunnable(1, () => lego.event.emit(BoardViewEvents.Wave2ActionsComplete));
             },
         });

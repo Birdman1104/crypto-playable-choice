@@ -25,7 +25,7 @@ class SoundControl {
             .on(BoardViewEvents.CarAnimationStart, this.playCar, this)
             .on(BoardViewEvents.CarAnimationComplete, this.playGuyReaction, this)
             .on(BoardViewEvents.HouseAnimationStart, this.playHome, this)
-            .on(BoardViewEvents.GirlAnimationComplete, this.playGirlSound, this)
+            .on(BoardViewEvents.Wave3ActionsComplete, this.playGirlSound, this)
             .on(PhoneViewEvents.ChoiceClick, this.playClick, this);
     }
 
@@ -33,7 +33,7 @@ class SoundControl {
         this.sounds.click = new Howl({ src: CLICK_SOUND, volume: 1 });
         this.sounds.car = new Howl({ src: CAR_SOUND, volume: 0.7 });
         this.sounds.fail = new Howl({ src: FAIL_SOUND, volume: 1 });
-        this.sounds.girlHello = new Howl({ src: GIRL_SOUND, volume: 1 });
+        this.sounds.girlHello = new Howl({ src: GIRL_SOUND, volume: 1.1 });
         this.sounds.guyReaction = new Howl({ src: GUY_REACTION, volume: 1 });
         this.sounds.home = new Howl({ src: HOME_SOUND, volume: 1 });
         this.sounds.phone = new Howl({ src: PHONE_SOUND, volume: 1 });
@@ -108,6 +108,20 @@ class SoundControl {
         for (const [key, value] of Object.entries(this.sounds)) {
             // @ts-ignore
             value.volume(muted ? 0 : 1);
+            if (key === 'theme') {
+                // @ts-ignore
+                value.volume(muted ? 0 : 0.4);
+            }
+
+            if (key === 'car') {
+                // @ts-ignore
+                value.volume(muted ? 0 : 0.7);
+            }
+
+            if (key === 'girlHello') {
+                // @ts-ignore
+                value.volume(muted ? 0 : 1.1);
+            }
         }
     }
 }

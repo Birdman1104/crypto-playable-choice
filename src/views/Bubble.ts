@@ -7,7 +7,6 @@ import { callIfExists, delayRunnable, makeSprite } from '../utils';
 
 export class Bubble extends Container {
     private bubble: Sprite;
-    private text: Sprite;
 
     constructor() {
         super();
@@ -48,7 +47,6 @@ export class Bubble extends Container {
 
     private build(): void {
         this.buildBubble();
-        this.buildText();
         this.scale.set(0);
     }
 
@@ -56,12 +54,5 @@ export class Bubble extends Container {
         this.bubble = makeSprite({ texture: Images['game/bubble'] });
         this.bubble.anchor.set(0, 1);
         this.addChild(this.bubble);
-    }
-
-    private buildText(): void {
-        this.text = makeSprite({ texture: Images['game/bubble_text'] });
-        this.text.anchor.set(0.5);
-        this.text.position.set(220, -90);
-        this.addChild(this.text);
     }
 }

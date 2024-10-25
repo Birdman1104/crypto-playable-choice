@@ -11,9 +11,7 @@ export class MainHead extends Container {
     private closedEyes: Sprite;
 
     private lips: Sprite;
-    private mouth1: Sprite;
-    private mouth2: Sprite;
-    private mouth3: Sprite;
+    private mouth: Sprite;
 
     private brows: Sprite;
     private browsHappy: Sprite;
@@ -54,7 +52,7 @@ export class MainHead extends Container {
 
         this.hideAll();
 
-        [this.happyEyes, this.mouth1, this.browsHappy].forEach((c) => (c.alpha = 1));
+        [this.happyEyes, this.mouth, this.browsHappy].forEach((c) => (c.alpha = 1));
 
         anime({
             targets: this,
@@ -104,14 +102,8 @@ export class MainHead extends Container {
         this.lips = makeSprite({ texture: Images['main_guy/lips'] });
         this.addChild(this.lips);
 
-        this.mouth1 = makeSprite({ texture: Images['main_guy/mouth_1'] });
-        this.addChild(this.mouth1);
-
-        this.mouth2 = makeSprite({ texture: Images['main_guy/mouth_2'] });
-        this.addChild(this.mouth2);
-
-        this.mouth3 = makeSprite({ texture: Images['main_guy/mouth_3'] });
-        this.addChild(this.mouth3);
+        this.mouth = makeSprite({ texture: Images['main_guy/mouth'] });
+        this.addChild(this.mouth);
 
         this.brows = makeSprite({ texture: Images['main_guy/brows'] });
         this.addChild(this.brows);
@@ -128,9 +120,7 @@ export class MainHead extends Container {
             this.happyEyes,
             this.downEyes,
             this.lips,
-            this.mouth1,
-            this.mouth2,
-            this.mouth3,
+            this.mouth,
             this.brows,
             this.browsHappy,
         ].forEach((c) => anime.remove(c));
@@ -139,16 +129,8 @@ export class MainHead extends Container {
     }
 
     private hideAll(): void {
-        [
-            this.closedEyes,
-            this.happyEyes,
-            this.downEyes,
-            this.lips,
-            this.mouth1,
-            this.mouth2,
-            this.mouth3,
-            this.brows,
-            this.browsHappy,
-        ].forEach((c) => (c.alpha = 0));
+        [this.closedEyes, this.happyEyes, this.downEyes, this.lips, this.mouth, this.brows, this.browsHappy].forEach(
+            (c) => (c.alpha = 0),
+        );
     }
 }

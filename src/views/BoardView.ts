@@ -86,7 +86,6 @@ export class BoardView extends Container {
     private buildBubble(): void {
         this.bubble = new Bubble();
         this.bubble.position.set(this.poorGuy.x - 30, this.poorGuy.y - 40);
-        this.bubble.scale.set(0.8);
         this.addChild(this.bubble);
     }
 

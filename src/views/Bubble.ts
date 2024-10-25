@@ -17,26 +17,17 @@ export class Bubble extends Container {
 
     public show(): void {
         anime({
-            targets: this.bubble.scale,
-            x: 1,
-            y: 1,
-            duration: 300,
+            targets: this.scale,
+            x: 0.8,
+            y: 0.8,
+            duration: 200,
             easing: 'easeInOutSine',
             complete: () => {
-                anime({
-                    targets: this.text.scale,
-                    x: 1,
-                    y: 1,
-                    duration: 300,
-                    easing: 'easeInOutSine',
-                    complete: () => {
-                        delayRunnable(3, () => {
-                            const cb = () => {
-                                lego.event.emit(BoardViewEvents.PreActionsComplete);
-                            };
-                            this.hide(cb);
-                        });
-                    },
+                delayRunnable(1.5, () => {
+                    const cb = () => {
+                        lego.event.emit(BoardViewEvents.PreActionsComplete);
+                    };
+                    this.hide(cb);
                 });
             },
         });
@@ -44,20 +35,11 @@ export class Bubble extends Container {
 
     public hide(cb?): void {
         anime({
-            targets: this.text.scale,
+            targets: this.scale,
             x: 0,
             y: 0,
-            duration: 300,
             easing: 'easeInOutSine',
-        });
-
-        anime({
-            targets: this.bubble.scale,
-            x: 0,
-            y: 0,
-            delay: 200,
-            easing: 'easeInOutSine',
-            duration: 300,
+            duration: 200,
             complete: () => {
                 callIfExists(cb);
             },
@@ -67,12 +49,12 @@ export class Bubble extends Container {
     private build(): void {
         this.buildBubble();
         this.buildText();
+        this.scale.set(0);
     }
 
     private buildBubble(): void {
         this.bubble = makeSprite({ texture: Images['game/bubble'] });
         this.bubble.anchor.set(0, 1);
-        this.bubble.scale.set(0);
         this.addChild(this.bubble);
     }
 
@@ -80,7 +62,6 @@ export class Bubble extends Container {
         this.text = makeSprite({ texture: Images['game/bubble_text'] });
         this.text.anchor.set(0.5);
         this.text.position.set(220, -90);
-        this.text.scale.set(0);
         this.addChild(this.text);
     }
 }

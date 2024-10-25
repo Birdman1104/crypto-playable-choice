@@ -24,10 +24,25 @@ export class PhoneView extends Container {
         return 'PhoneView';
     }
 
-    public getHintPosition(): Point[] {
+    public getRightChoicePosition(): Point[] {
         let correctAnswer = this.rightChoice.isCorrectAnswer ? this.rightChoice : this.leftChoice;
         const pos = new Point(correctAnswer.x + correctAnswer.width / 3.5, correctAnswer.y + 25);
         return [this.toGlobal(pos)];
+    }
+
+    public getChoicesPositions(): Point[] {
+        const pos1 = new Point(this.leftChoice.x + this.leftChoice.width / 3.5, this.leftChoice.y + 25);
+        const pos2 = new Point(this.rightChoice.x + this.rightChoice.width / 3.5, this.rightChoice.y + 25);
+        return [this.toGlobal(pos1), this.toGlobal(pos2)];
+    }
+
+    public glowChoices(): void {
+        this.leftChoice.glow(() => this.rightChoice.glow());
+    }
+
+    public glowRightChoice(): void {
+        const rightChoice = this.rightChoice.isCorrectAnswer ? this.rightChoice : this.leftChoice;
+        rightChoice.glow();
     }
 
     public updateChoices(choices: { right: ChoiceModel; wrong: ChoiceModel }): void {

@@ -1,10 +1,11 @@
 import anime from 'animejs';
-import { Container, Sprite } from 'pixi.js';
+import { Container, Rectangle, Sprite } from 'pixi.js';
 import { Images } from '../assets';
-import { makeSprite } from '../utils';
+import { callIfExists, makeSprite } from '../utils';
 
 export class ChoiceView extends Container {
     private choice: Sprite;
+    private choiceCopy: Sprite;
     private clickedChoice: Sprite;
     private canEmit = true;
     private canAnimate = true;
@@ -19,8 +20,40 @@ export class ChoiceView extends Container {
         return this.config.isCorrectAnswer;
     }
 
+    get icon(): string {
+        return this.config.icon;
+    }
+
+    public getBounds(skipUpdate?: boolean | undefined, rect?: Rectangle | undefined): Rectangle {
+        return this.choice.getBounds();
+    }
+
     public disable(): void {
         this.canEmit = false;
+    }
+
+    public glow(cb?): void {
+        this.choiceCopy = makeSprite({ texture: Images[`game/${this.config.icon}`] });
+        this.addChild(this.choiceCopy);
+
+        anime({
+            targets: this.choiceCopy,
+            alpha: 0,
+            easing: 'easeInOutSine',
+            duration: 500,
+        });
+        anime({
+            targets: this.choiceCopy.scale,
+            x: 1.15,
+            y: 1.15,
+            easing: 'easeInOutSine',
+            duration: 500,
+            complete: () => {
+                this.choiceCopy.visible = false;
+                this.choiceCopy.destroy();
+                callIfExists(cb);
+            },
+        });
     }
 
     public animateClick(): void {

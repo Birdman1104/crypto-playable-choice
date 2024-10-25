@@ -22,7 +22,7 @@ function isAppleDevice() {
 
 window.CTACallImitation = () => {
     if (isAppleDevice()) {
-        window.open('');
+        window.open('https://apps.apple.com/am/app/crypto-miner-tycoon/id6450786835');
     } else {
         window.open('https://play.google.com/store/apps/details?id=com.mysterytag.cryptominer&hl=us');
     }

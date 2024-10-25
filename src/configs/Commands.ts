@@ -138,9 +138,9 @@ export const restartHintCommand = (): void => {
 };
 
 export const takeToStoreCommand = (): void => {
-    if (!window.installCTA) {
-        window.CTACallImitation && window.CTACallImitation();
-    } else {
-        window.installCTA();
-    }
+    // if (!window.installCTA) {
+    window.CTACallImitation && window.CTACallImitation();
+    // } else {
+    //     window.installCTA();
+    // }
 };

@@ -5,12 +5,15 @@ import { Images } from '../assets';
 import { GameModelEvents, HintModelEvents } from '../events/ModelEvents';
 import { GameState } from '../models/GameModel';
 import { getViewByProperty, makeSprite } from '../utils';
+import { PhoneView } from './PhoneView';
 
 export class HintView extends Container {
     private hand: Sprite;
     private hintPositions: Point[] = [];
     private currentPoint = 0;
     private isFirstWave = true;
+    private phoneView: PhoneView;
+    private bool = true;
 
     constructor() {
         super();
@@ -36,7 +39,13 @@ export class HintView extends Container {
     }
 
     private onHintVisibleUpdate(visible: boolean): void {
-        visible ? this.show() : this.hide();
+        if (visible) {
+            this.bool = true;
+            this.show();
+        } else {
+            this.hide();
+        }
+        // visible ? this.show() : this.hide();
     }
 
     private onGameStateUpdate(state: GameState): void {
@@ -47,6 +56,8 @@ export class HintView extends Container {
         this.hand = makeSprite({ texture: Images['game/hand'] });
         this.hand.anchor.set(0.15, 0.25);
         this.addChild(this.hand);
+
+        this.phoneView = getViewByProperty('name', 'PhoneView') as PhoneView;
     }
 
     private show(): void {
@@ -54,13 +65,13 @@ export class HintView extends Container {
         this.hintPositions = this.getHintPosition();
         this.currentPoint = 0;
 
-        const phone = getViewByProperty('name', 'PhoneView');
         if (this.isFirstWave) {
-            phone.glowRightChoice();
+            this.phoneView.glowRightChoice();
             this.pointHand(1100);
         } else {
-            phone.glowChoices();
-            this.pointHand(2200);
+            this.phoneView.glowChoices(this.bool);
+            this.bool = !this.bool;
+            this.pointHand(1100);
         }
     }
 
@@ -96,17 +107,8 @@ export class HintView extends Container {
             duration: 500,
             easing: 'easeInOutCubic',
             direction: 'alternate',
-            loop: this.isFirstWave ? 6 : 1,
             complete: () => {
-                if (this.isFirstWave) {
-                    this.hideHand();
-                } else {
-                    this.currentPoint += 1;
-                    if (this.currentPoint >= this.hintPositions.length) {
-                        this.currentPoint = 0;
-                    }
-                    this.moveHand(this.hintPositions[this.currentPoint]);
-                }
+                this.hideHand();
             },
         });
     }
@@ -122,6 +124,12 @@ export class HintView extends Container {
                 if (this.currentPoint >= this.hintPositions.length) {
                     this.currentPoint = 0;
                 }
+                if (!this.isFirstWave) {
+                    this.phoneView.glowChoices(this.bool);
+                    this.bool = !this.bool;
+                } else {
+                    this.phoneView.glowRightChoice();
+                }
                 this.moveHand(this.hintPositions[this.currentPoint]);
             },
         });
@@ -132,7 +140,7 @@ export class HintView extends Container {
             targets: this.hand,
             x: pos.x,
             y: pos.y,
-            duration: 500,
+            duration: 600,
             easing: 'easeInOutCubic',
             complete: () => this.showHand(),
         });
@@ -144,9 +152,8 @@ export class HintView extends Container {
     }
 
     private getHintPosition(): Point[] {
-        const phoneView = getViewByProperty('name', 'PhoneView');
-        if (!phoneView) return [new Point(0, 0)];
+        if (!this.phoneView) return [new Point(0, 0)];
 
-        return this.isFirstWave ? phoneView.getRightChoicePosition() : phoneView.getChoicesPositions();
+        return this.isFirstWave ? this.phoneView.getRightChoicePosition() : this.phoneView.getChoicesPositions();
     }
 }

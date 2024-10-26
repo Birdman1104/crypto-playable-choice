@@ -8,8 +8,7 @@ export class MainBody extends Container {
     private torso: Sprite;
     private leftArm: Sprite;
     private rightArm: Sprite;
-    private leftLeg: Sprite;
-    private rightLeg: Sprite;
+    private legs: Sprite;
     private head: MainHead;
 
     constructor() {
@@ -87,11 +86,8 @@ export class MainBody extends Container {
         this.leftArm.position.set(this.leftArm.width * 0.1, -this.leftArm.height * 0.22);
         this.addChild(this.leftArm);
 
-        this.leftLeg = makeSprite({ texture: Images['main_guy/left_leg'] });
-        this.addChild(this.leftLeg);
-
-        this.rightLeg = makeSprite({ texture: Images['main_guy/right_leg'] });
-        this.addChild(this.rightLeg);
+        this.legs = makeSprite({ texture: Images['main_guy/legs'] });
+        this.addChild(this.legs);
 
         this.addChild(this.torso);
 
@@ -107,14 +103,12 @@ export class MainBody extends Container {
             this.torso,
             this.rightArm,
             this.leftArm,
-            this.rightLeg,
-            this.leftLeg,
+            this.legs,
             this.scale,
             this.torso.scale,
             this.rightArm.scale,
             this.leftArm.scale,
-            this.rightLeg.scale,
-            this.leftLeg.scale,
+            this.legs.scale,
         ].forEach((c) => anime.remove(c));
     }
 }

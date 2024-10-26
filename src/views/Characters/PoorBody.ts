@@ -8,8 +8,7 @@ export class PoorBody extends Container {
     private torso: Sprite;
     private leftArm: Sprite;
     private rightArm: Sprite;
-    private leftLeg: Sprite;
-    private rightLeg: Sprite;
+    private legs: Sprite;
     private head: PoorHead;
 
     constructor() {
@@ -86,11 +85,8 @@ export class PoorBody extends Container {
         this.rightArm.position.set(this.rightArm.width * 0.1, -this.rightArm.height * 0.22);
         this.addChild(this.rightArm);
 
-        this.leftLeg = makeSprite({ texture: Images['poor/l_leg'] });
-        this.addChild(this.leftLeg);
-
-        this.rightLeg = makeSprite({ texture: Images['poor/r_leg'] });
-        this.addChild(this.rightLeg);
+        this.legs = makeSprite({ texture: Images['poor/legs'] });
+        this.addChild(this.legs);
 
         this.addChild(this.torso);
 
@@ -106,14 +102,12 @@ export class PoorBody extends Container {
             this.torso,
             this.rightArm,
             this.leftArm,
-            this.rightLeg,
-            this.leftLeg,
+            this.legs,
             this.scale,
             this.torso.scale,
             this.rightArm.scale,
             this.leftArm.scale,
-            this.rightLeg.scale,
-            this.leftLeg.scale,
+            this.legs.scale,
         ].forEach((c) => anime.remove(c));
     }
 }

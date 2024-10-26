@@ -57,10 +57,10 @@ export class HintView extends Container {
         const phone = getViewByProperty('name', 'PhoneView');
         if (this.isFirstWave) {
             phone.glowRightChoice();
-            this.pointHand(600);
+            this.pointHand(1100);
         } else {
             phone.glowChoices();
-            this.pointHand(1100);
+            this.pointHand(2200);
         }
     }
 

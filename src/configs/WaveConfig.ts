@@ -40,7 +40,7 @@ export const WAVE_CONFIG: readonly WaveConfig[] = Object.freeze([
             price: 65000,
             reward: '1000000',
             isCorrectAnswer: true,
-            icon: 'bitcoin',
+            icon: 'btc',
         },
         wrongChoice: {
             name: 'YACHT',

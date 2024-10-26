@@ -114,7 +114,7 @@ export class House extends Container {
 
     private playDustVFX(): void {
         const frames: any[] = [];
-        for (let i = 0; i <= 16; i++) {
+        for (let i = 0; i <= 14; i++) {
             frames.push(Images[`dust/Fx03_${i < 10 ? '0' + i : i}`]);
         }
 

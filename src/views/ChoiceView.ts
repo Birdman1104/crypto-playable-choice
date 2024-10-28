@@ -46,10 +46,32 @@ export class ChoiceView extends Container {
         });
     }
 
+    public showGlow(cb?): void {
+        anime({
+            targets: this.whiteBkg,
+            alpha: 1,
+            easing: 'easeInOutSine',
+            duration: 500,
+            complete: () => callIfExists(cb),
+        });
+    }
+
+    public hideGlow(cb?): void {
+        anime({
+            targets: this.whiteBkg,
+            alpha: 0,
+            easing: 'easeInOutSine',
+            duration: 500,
+            complete: () => callIfExists(cb),
+        });
+    }
+
     public animateClick(): void {
         if (this.canAnimate) {
             this.canAnimate = false;
             let emitted = false;
+            anime.remove(this.whiteBkg);
+            this.whiteBkg.alpha = 0;
             anime({
                 targets: this.scale,
                 x: 0.6,

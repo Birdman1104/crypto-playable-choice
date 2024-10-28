@@ -37,8 +37,21 @@ export class PhoneView extends Container {
         return [this.toGlobal(pos1), this.toGlobal(pos2)];
     }
 
-    public glowChoices(bool: boolean): void {
-        bool ? this.leftChoice.glow() : this.rightChoice.glow();
+    public glowChoices(isLeftChoice: boolean): void {
+        isLeftChoice ? this.leftChoice.glow() : this.rightChoice.glow();
+    }
+
+    public showChoiceGlow(isLeftChoice: boolean): void {
+        isLeftChoice ? this.leftChoice.showGlow() : this.rightChoice.showGlow();
+    }
+
+    public hideChoiceGlow(isLeftChoice: boolean): void {
+        isLeftChoice ? this.leftChoice.hideGlow() : this.rightChoice.hideGlow();
+    }
+
+    public hideGlows(): void {
+        this.leftChoice?.hideGlow();
+        this.rightChoice?.hideGlow();
     }
 
     public glowRightChoice(): void {

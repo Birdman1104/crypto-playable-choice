@@ -13,7 +13,7 @@ export class HintView extends Container {
     private currentPoint = 0;
     private isFirstWave = true;
     private phoneView: PhoneView;
-    private bool = true;
+    private isLeftChoice = true;
 
     constructor() {
         super();
@@ -40,7 +40,7 @@ export class HintView extends Container {
 
     private onHintVisibleUpdate(visible: boolean): void {
         if (visible) {
-            this.bool = true;
+            this.isLeftChoice = true;
             this.show();
         } else {
             this.hide();
@@ -69,14 +69,15 @@ export class HintView extends Container {
             this.phoneView.glowRightChoice();
             this.pointHand();
         } else {
-            this.phoneView.glowChoices(this.bool);
-            this.bool = !this.bool;
+            this.phoneView.showChoiceGlow(this.isLeftChoice);
+            // this.isLeftChoice = !this.isLeftChoice;
             this.pointHand();
         }
     }
 
     private hide(): void {
         this.removeTweens();
+        this.phoneView.hideGlows();
         this.hand.alpha = 0;
     }
 
@@ -84,7 +85,7 @@ export class HintView extends Container {
         const point = this.hintPositions[this.currentPoint];
         this.hand.scale.set(1);
         this.hand.position.set(point.x, point.y);
-        this.showHand(600);
+        this.showHand(100);
     }
 
     private showHand(delay = 0): void {
@@ -125,8 +126,9 @@ export class HintView extends Container {
                     this.currentPoint = 0;
                 }
                 if (!this.isFirstWave) {
-                    this.phoneView.glowChoices(this.bool);
-                    this.bool = !this.bool;
+                    this.phoneView.hideChoiceGlow(this.isLeftChoice);
+                    this.isLeftChoice = !this.isLeftChoice;
+                    this.phoneView.showChoiceGlow(this.isLeftChoice);
                 } else {
                     this.phoneView.glowRightChoice();
                 }

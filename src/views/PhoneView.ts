@@ -56,7 +56,7 @@ export class PhoneView extends Container {
 
     public glowRightChoice(): void {
         const rightChoice = this.rightChoice.isCorrectAnswer ? this.rightChoice : this.leftChoice;
-        rightChoice.glow();
+        rightChoice.showGlow();
     }
 
     public updateChoices(choices: { right: ChoiceModel; wrong: ChoiceModel }): void {

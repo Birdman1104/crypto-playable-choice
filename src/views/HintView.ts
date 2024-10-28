@@ -67,12 +67,10 @@ export class HintView extends Container {
 
         if (this.isFirstWave) {
             this.phoneView.glowRightChoice();
-            this.pointHand();
         } else {
             this.phoneView.showChoiceGlow(this.isLeftChoice);
-            // this.isLeftChoice = !this.isLeftChoice;
-            this.pointHand();
         }
+        this.pointHand();
     }
 
     private hide(): void {
@@ -130,7 +128,7 @@ export class HintView extends Container {
                     this.isLeftChoice = !this.isLeftChoice;
                     this.phoneView.showChoiceGlow(this.isLeftChoice);
                 } else {
-                    this.phoneView.glowRightChoice();
+                    this.phoneView.hideGlows();
                 }
                 this.moveHand(this.hintPositions[this.currentPoint]);
             },
@@ -144,7 +142,12 @@ export class HintView extends Container {
             y: pos.y,
             duration: 600,
             easing: 'easeInOutCubic',
-            complete: () => this.showHand(),
+            complete: () => {
+                if (this.isFirstWave) {
+                    this.phoneView.glowRightChoice();
+                }
+                this.showHand();
+            },
         });
     }
 

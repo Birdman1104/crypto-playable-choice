@@ -67,11 +67,11 @@ export class HintView extends Container {
 
         if (this.isFirstWave) {
             this.phoneView.glowRightChoice();
-            this.pointHand(1100);
+            this.pointHand();
         } else {
             this.phoneView.glowChoices(this.bool);
             this.bool = !this.bool;
-            this.pointHand(1100);
+            this.pointHand();
         }
     }
 
@@ -80,11 +80,11 @@ export class HintView extends Container {
         this.hand.alpha = 0;
     }
 
-    private pointHand(delay = 0): void {
+    private pointHand(): void {
         const point = this.hintPositions[this.currentPoint];
         this.hand.scale.set(1);
         this.hand.position.set(point.x, point.y);
-        this.showHand(delay);
+        this.showHand(600);
     }
 
     private showHand(delay = 0): void {

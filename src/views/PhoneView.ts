@@ -20,6 +20,7 @@ export class PhoneView extends Container {
         this.build();
     }
 
+    // @ts-ignore
     get name(): string {
         return 'PhoneView';
     }
@@ -36,8 +37,8 @@ export class PhoneView extends Container {
         return [this.toGlobal(pos1), this.toGlobal(pos2)];
     }
 
-    public glowChoices(): void {
-        this.leftChoice.glow(() => this.rightChoice.glow());
+    public glowChoices(bool: boolean): void {
+        bool ? this.leftChoice.glow() : this.rightChoice.glow();
     }
 
     public glowRightChoice(): void {
